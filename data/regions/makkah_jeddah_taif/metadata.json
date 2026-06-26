@@ -1,0 +1,57 @@
+{
+ "width": 1600,
+ "height": 1152,
+ "src_width": 5815,
+ "src_height": 4214,
+ "src_resolution_m": 30,
+ "crs": "EPSG:32637 (UTM 37N)",
+ "data_source": "User sink-filled DEM (Kingdom-wide, ~30m, EPSG:4326) clipped to AOI; hydrology recomputed with pysheds",
+ "bounds": {
+  "lon_min": 38.97610742067801,
+  "lon_max": 40.65361541208427,
+  "lat_min": 20.941127175853502,
+  "lat_max": 22.07479076698455
+ },
+ "elevation": {
+  "min": -3.0,
+  "max": 2595.0,
+  "mean": 625.6,
+  "nodata": -32768
+ },
+ "area_km": {
+  "width": 174.4,
+  "height": 126.4
+ },
+ "flowacc": {
+  "max": 412704,
+  "dtype": "uint32",
+  "channel_threshold": 500,
+  "major_channel_threshold": 5000
+ },
+ "region": "Makkah \u2013 Jeddah \u2013 Taif, Saudi Arabia",
+ "twi": {
+  "dtype": "float32",
+  "range": "0..1 percentile-rank flood susceptibility",
+  "source": "user authoritative TWI raster (rank-normalised)",
+  "note": "0 = driest land cell, 1 = wettest; scale-invariant"
+ },
+ "slope": {
+  "dtype": "float32",
+  "units": "degrees",
+  "source": "user authoritative slope raster (converted from radians)"
+ },
+ "dtm": {
+  "dtype": "int16",
+  "units": "meters",
+  "nodata": -32768,
+  "min": -5,
+  "max": 2595,
+  "mean": 625.5,
+  "source": "user authoritative bare-earth DTM (Kingdom-wide ~30m, EPSG:4326), clipped + reprojected to UTM 37N",
+  "note": "DEM minus DTM = sink-fill depth (closed depressions raised by hydrological conditioning, max ~26 m)"
+ },
+ "phase": "Phase 4 - multi-region",
+ "utm_epsg": 32637,
+ "region_key": "makkah_jeddah_taif",
+ "has_catchments": true
+}

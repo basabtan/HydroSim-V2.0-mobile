@@ -1,0 +1,533 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.1103053,
+     26.276533
+    ]
+   },
+   "properties": {
+    "name_en": "Lake Landhart",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.4576761,
+     25.9769229
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.0609844,
+     26.5907254
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.0617679,
+     26.5897701
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.0627456,
+     26.5886093
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     49.8955459,
+     26.8566906
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.138808,
+     26.3605161
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5597204,
+     26.0568944
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5624521,
+     26.0533497
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5592603,
+     26.0675602
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.574869,
+     26.0702542
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5466057,
+     26.0717864
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5469887,
+     26.0715336
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5475921,
+     26.072677
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5754701,
+     26.2342528
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.600149,
+     26.2286367
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.5278132,
+     26.0726879
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.4961138,
+     26.0129184
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.6140645,
+     25.8337231
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.6578603,
+     26.293528
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.6579931,
+     26.2935038
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.6581776,
+     26.2935948
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.461782,
+     25.9786645
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  },
+  {
+   "type": "Feature",
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     50.4707861,
+     25.9844363
+    ]
+   },
+   "properties": {
+    "name_en": "Unnamed dam / reservoir",
+    "name_ar": "",
+    "capacity_m3": null,
+    "capacity_mcm": null,
+    "height_m": null,
+    "year": null,
+    "material": null,
+    "verified": false,
+    "source": "OpenStreetMap",
+    "catchment_area_km2": 0
+   }
+  }
+ ]
+}

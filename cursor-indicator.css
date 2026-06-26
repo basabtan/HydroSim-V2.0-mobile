@@ -1,0 +1,62 @@
+/* =====================================================================
+   Abdul-S cursor coordinate indicator — STYLES
+   All selectors are namespaced (rg-* / .cursor-dot) to avoid clashes.
+   IMPORTANT: replace #canvasWrap below with the id of YOUR map-wrapper
+   element (the positioned container that holds the <canvas>).
+   The wrapper MUST have: position: relative;
+   ===================================================================== */
+
+/* Hide the OS cursor ONLY while the indicator is enabled (.ind-on) and the
+   pointer is actually over the map canvas. Leaving the map (or toggling the
+   indicator off) restores the normal cursor. Crosshair wins while profiling. */
+#canvasWrap.ind-on:not(.profiling) #mapCanvas { cursor: none; }
+#canvasWrap.profiling #mapCanvas { cursor: crosshair; }
+
+/* small glowing dot that sits exactly under the pointer */
+.cursor-dot {
+  position: absolute; left: 0; top: 0; width: 7px; height: 7px; border-radius: 50%;
+  transform: translate(-50%, -50%); pointer-events: none; z-index: 41; opacity: 0;
+  background: #6ff0e6; box-shadow: 0 0 9px 2px rgba(95,240,230,.75);
+  transition: opacity .12s;
+}
+#canvasWrap.ind-on.rg-hover .cursor-dot { opacity: 1; }
+
+/* the orbit-ring readout, centered on the pointer */
+.rg-readout {
+  position: absolute; left: 0; top: 0; z-index: 40; pointer-events: none;
+  transform: translate(-50%, -50%); opacity: 0; transition: opacity .12s;
+}
+#canvasWrap.ind-on.rg-hover .rg-readout { opacity: 1; }
+
+.rg-gauge { position: relative; width: 96px; height: 96px; }
+.rg-gauge svg { position: absolute; inset: 0; transform: rotate(-90deg); } /* s=0 at top (N), clockwise */
+
+.rg-bgring { fill: none; stroke: rgba(120,170,190,.6); stroke-width: 7; }      /* thick 360° backdrop */
+.rg-track  { fill: none; stroke: rgba(120,170,190,.26); stroke-width: 3; }     /* the visible arc track */
+.rg-ghost  { fill: none; stroke: rgba(120,170,190,.28); stroke-width: 1.4;     /* dotted infill of N↔E corner */
+             stroke-linecap: round; stroke-dasharray: 0.5 5; }
+.rg-anchor { fill: #6ff0e6; filter: drop-shadow(0 0 4px rgba(95,240,230,.85)); }
+.rg-fill   { fill: none; stroke: url(#rgFillGrad); stroke-width: 3.5; stroke-linecap: round; /* value arc */
+             filter: drop-shadow(0 0 5px rgba(120,200,150,.6)); }
+.rg-center { position: absolute; left: 50%; top: 50%; width: 5px; height: 5px; border-radius: 50%;
+             transform: translate(-50%,-50%); background: #6ff0e6;
+             box-shadow: 0 0 8px 2px rgba(95,240,230,.7); }
+
+.rg-lab {
+  position: absolute; font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11.5px; white-space: nowrap; display: flex; gap: 4px; align-items: baseline;
+  text-shadow: 0 1px 5px rgba(0,0,0,.95); color: #eaf7fa;
+}
+.rg-lbl  { color: #4ed8d8; font-weight: 700; }
+.rg-unit { color: #7fa3b3; font-size: 10px; }
+.rg-n { left: 50%; top: 50%; transform: translate(-50%,-50%) translateY(-48px); }
+.rg-e { left: 50%; top: 50%; transform: translate(-50%,-50%) translateX(48px); }
+.rg-z { left: 50%; top: 50%; transform: translate(-50%,-50%) translateX(-64px);
+        flex-direction: column; gap: 1px; align-items: flex-end; text-align: right; }
+.rg-zlbl { color: #4ed8d8; font-weight: 700; font-size: 10px; letter-spacing: .5px; }
+.rg-zval { display: flex; gap: 3px; align-items: baseline; line-height: 1; }
+.rg-zval .rg-val { font-weight: 700; transition: font-size .08s linear; }
+
+/* hide the indicator while the profile tool is active */
+#canvasWrap.profiling .cursor-dot,
+#canvasWrap.profiling .rg-readout { opacity: 0 !important; }

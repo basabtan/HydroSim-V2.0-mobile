@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>HydroSim — Saudi Arabia Flood &amp; Terrain Viewer</title>
+  <meta name="description" content="HydroSim multi-region Saudi Arabia flood and terrain intelligence viewer with DEM, DTM, slope, wetness, dams, rainfall-runoff simulation and 3D terrain." />
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&f[]=jetbrains-mono@400,500&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./cursor-indicator.css" />
+</head>
+<body>
+
+  <section id="hydrosimHome" class="home-gate" aria-label="HydroSim home screen">
+    <div class="home-gate__grid"></div>
+    <div class="home-gate__glow home-gate__glow--one"></div>
+    <div class="home-gate__glow home-gate__glow--two"></div>
+    <div class="home-gate__content">
+      <button id="homeLogoBtn" class="home-logo-btn" type="button" aria-label="Enter HydroSim">
+        <span class="home-logo-frame">
+          <img src="./assets/hydrosim-home-icon-4k.png" alt="HydroSim logo icon" />
+        </span>
+      </button>
+      <img class="home-wordmark" src="./assets/hydrosim-wordmark-4k.png" alt="HydroSim — Rain & Terrain Intelligence" />
+      <div class="home-enter-line">Click the drop to enter</div>
+    </div>
+  </section>
+
+  <div id="app">
+    <header id="topbar">
+      <div class="top-brand">
+        <div class="logo-shell">
+          <img src="./assets/hydrosim-icon-cropped.png" alt="HydroSim water drop terrain logo" />
+        </div>
+        <img class="hydrosim-wordmark" src="./assets/hydrosim-wordmark-4k.png" alt="HydroSim — Rain & Terrain Intelligence" />
+      </div>
+
+      <div class="top-search">
+        <span class="search-dot"></span>
+        <span>Saudi Arabia Multi-Region Flood Viewer</span>
+      </div>
+
+      <div class="top-item">
+        <span class="top-icon">△</span>
+        <div>
+          <div class="top-title">Terrain Model</div>
+          <div class="top-value">DEM / DTM</div>
+        </div>
+      </div>
+      <div class="top-item">
+        <span class="top-icon">⌁</span>
+        <div>
+          <div class="top-title">Simulation</div>
+          <div class="top-value">Rainfall Runoff</div>
+        </div>
+      </div>
+      <div class="top-item top-live">
+        <span class="live-dot"></span>
+        <div>
+          <div class="top-title">Status</div>
+          <div class="top-value">Local Model</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <nav class="rail" aria-label="HydroSim navigation">
+        <button class="nav active" type="button" data-panel="terrain" title="Terrain"><span>△</span><small>Terrain</small></button>
+        <button class="nav" type="button" data-panel="rain" title="Rain"><span>☂</span><small>Rain</small></button>
+        <button class="nav" type="button" data-panel="flood" title="Flood"><span>≋</span><small>Flood</small></button>
+        <button class="nav" type="button" data-panel="dams" title="Dams"><span>◈</span><small>Dams</small></button>
+        <button class="nav spacer" title="Data"><span>◎</span><small>Data</small></button>
+      </nav>
+
+      <aside id="sidebar" class="mobile-panel">
+        <header class="brand compact-brand">
+          <img class="brand-logo" src="./assets/hydrosim-icon-cropped.png" alt="HydroSim logo" />
+          <div class="brand-text">
+            <h1>Control Lens</h1>
+            <span>Terrain layers</span>
+          </div>
+        </header>
+
+        <section class="panel scope-panel">
+          <h2>Region &amp; Data</h2>
+          <select id="regionSelect" class="region-select" aria-label="Choose region or Kingdom overview"></select>
+          <button class="tool-btn ghost-btn" id="kingdomBtn" type="button">◎ Kingdom overview</button>
+          <p class="hint" id="overviewHint">Click a highlighted region on the map to zoom in, or choose a region from the dropdown.</p>
+          <p class="region" id="regionName">—</p>
+          <dl class="meta" id="metaList"></dl>
+        </section>
+
+        <section class="panel">
+          <h2>Visualization</h2>
+          <div class="layer-grid" id="layerGrid">
+            <button class="layer-btn active" data-layer="color"><span>▰</span>Elevation</button>
+            <button class="layer-btn" data-layer="dtm"><span>▱</span>DTM</button>
+            <button class="layer-btn" data-layer="hillshade"><span>△</span>Hillshade</button>
+            <button class="layer-btn" data-layer="slope"><span>≋</span>Slope</button>
+            <button class="layer-btn" data-layer="aspect"><span>◌</span>Aspect</button>
+            <button class="layer-btn" data-layer="twi"><span>≈</span>TWI</button>
+            <button class="layer-btn wide" data-layer="fill"><span>▣</span>Sink-fill</button>
+          </div>
+          <label class="toggle-row">
+            <span>Contour lines</span>
+            <input type="checkbox" id="contourToggle" />
+          </label>
+          <label class="toggle-row">
+            <span>3D terrain mode</span>
+            <input type="checkbox" id="threeToggle" />
+          </label>
+          <label class="toggle-row">
+            <span>Cursor indicator</span>
+            <input type="checkbox" id="cursorIndToggle" checked />
+          </label>
+        </section>
+
+        <section class="panel" id="legendPanel">
+          <h2 id="legendTitle">Elevation</h2>
+          <div class="legend-bar" id="legendBar"></div>
+          <div class="legend-labels">
+            <span id="legendMin">0</span>
+            <span id="legendMax">0</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Tools</h2>
+          <button class="tool-btn" id="profileBtn" type="button">△ Draw elevation profile</button>
+          <p class="hint" id="toolHint">Click and drag two points on the map to draw a cross-section.</p>
+        </section>
+
+        <footer class="side-foot">
+          Source: KAU sink-filled DEM &amp; bare-earth DTM · TWI &amp; slope · dams from OpenStreetMap · Kingdom overview + regional flood-analysis windows
+        </footer>
+      </aside>
+
+      <main id="viewport" class="mobile-panel is-active">
+        <div id="readout" class="readout">
+          <span class="readout-label">Elevation</span>
+          <span class="readout-value" id="readoutValue">— m</span>
+          <span class="readout-coord" id="readoutCoord">move cursor over map</span>
+        </div>
+
+        <div id="canvasWrap">
+          <canvas id="mapCanvas"></canvas>
+          <canvas id="floodCanvas"></canvas>
+          <canvas id="waterCanvas"></canvas>
+          <canvas id="damsCanvas"></canvas>
+          <canvas id="overlayCanvas"></canvas>
+
+          <!-- Cursor coordinate indicator (orbit ring) -->
+          <div id="cursorDot" class="cursor-dot"></div>
+          <div id="rgReadout" class="rg-readout">
+            <div class="rg-gauge">
+              <svg viewBox="0 0 96 96" width="96" height="96">
+                <defs>
+                  <linearGradient id="rgFillGrad" gradientUnits="userSpaceOnUse" x1="86" y1="70" x2="40" y2="6">
+                    <stop id="rgFillStop0" offset="0" stop-color="#e6cf3c"/>
+                    <stop id="rgFillStop1" offset="1" stop-color="#f2932c"/>
+                  </linearGradient>
+                </defs>
+                <circle class="rg-bgring" cx="48" cy="48" r="45"/>
+                <circle class="rg-track"  cx="48" cy="48" r="45" stroke-dasharray="0 82.47 192.42 7.85" stroke-dashoffset="0"/>
+                <circle class="rg-fill"   id="rgFill" cx="48" cy="48" r="45" stroke-dasharray="0 282.74" stroke-dashoffset="0"/>
+                <circle class="rg-ghost"  cx="48" cy="48" r="45" stroke-dasharray="82.47 200.27" stroke-dashoffset="0"/>
+                <circle class="rg-anchor" cx="48" cy="3"  r="1.9"/>
+                <circle class="rg-anchor" cx="93" cy="48" r="1.9"/>
+              </svg>
+              <div class="rg-center"></div>
+              <div class="rg-lab rg-n"><span class="rg-lbl">N</span><span class="rg-val" id="rgN">21</span><span class="rg-unit">°</span></div>
+              <div class="rg-lab rg-e"><span class="rg-lbl">E</span><span class="rg-val" id="rgE">39</span><span class="rg-unit">°</span></div>
+              <div class="rg-lab rg-z"><span class="rg-zlbl">Elev</span><span class="rg-zval"><span class="rg-val" id="rgZ">800</span><span class="rg-unit">m</span></span></div>
+            </div>
+          </div>
+
+          <div id="threeWrap" class="hidden"></div>
+          <div id="loading" class="loading"><div class="spinner"></div><p id="loadingMsg">Loading HydroSim terrain…</p></div>
+        </div>
+
+        <div id="waterBanner" class="water-banner hidden">
+          <span class="wb-dot"></span> <span id="waterBannerText">Rainfall active</span>
+        </div>
+
+        <div class="map-glow-card">
+          <span class="green-dot"></span>
+          <div>
+            <b>Terrain Intelligence</b>
+            <span>Elevation · slope · wetness · dams · flood depth</span>
+          </div>
+        </div>
+
+        <div id="profilePanel" class="profile-panel hidden">
+          <div class="profile-head">
+            <h3>Elevation Profile</h3>
+            <button id="closeProfile" aria-label="Close" type="button">×</button>
+          </div>
+          <canvas id="profileChart"></canvas>
+          <div class="profile-stats" id="profileStats"></div>
+        </div>
+      </main>
+
+      <aside id="hydroPanel" class="mobile-panel">
+        <section class="panel water-panel">
+          <h2>Rainfall-Runoff Flood Simulation</h2>
+          <div class="slider-block">
+            <label>Rainfall depth <span id="rainDepthVal" class="slider-num">30 mm</span></label>
+            <input type="range" id="rainDepth" min="0" max="200" value="30" step="5" />
+          </div>
+          <div class="slider-block">
+            <label>Storm duration <span id="rainDurVal" class="slider-num">2 h</span></label>
+            <input type="range" id="rainDur" min="1" max="24" value="2" />
+          </div>
+          <div class="slider-block">
+            <label>Soil infiltration <span id="infilVal" class="slider-num">Low (arid)</span></label>
+            <input type="range" id="infil" min="0" max="3" value="0" />
+          </div>
+          <button class="tool-btn water-btn" id="floodRunBtn" type="button">
+            <span class="wb-ico">▶</span> Run flood model
+          </button>
+          <button class="tool-btn ghost-btn" id="floodClearBtn" type="button">Clear simulation</button>
+          <div class="flood-stat" id="floodStat">
+            Set rainfall, then run the model to predict flooded wadis and depths.
+          </div>
+          <hr class="divider" />
+          <div class="slider-block">
+            <label>Rain intensity <span id="rainIntVal" class="slider-num">Moderate</span></label>
+            <input type="range" id="rainIntensity" min="1" max="10" value="5" />
+          </div>
+          <div class="slider-block">
+            <label>Simulation speed <span id="rainSpeedVal" class="slider-num">1.0×</span></label>
+            <input type="range" id="rainSpeed" min="0.25" max="3" value="1" step="0.25" />
+          </div>
+          <div class="slider-block">
+            <label>Soil infiltration <span id="rainInfilVal" class="slider-num">Low (arid)</span></label>
+            <input type="range" id="rainInfil" min="0" max="3" value="0" />
+          </div>
+          <button class="tool-btn water-btn" id="rainBtn" type="button">
+            <span class="wb-ico">☂</span> Start rainfall animation
+          </button>
+        </section>
+
+        <section class="panel" id="damsPanel">
+          <div class="dams-head">
+            <h2>Dams &amp; Reservoirs</h2>
+            <label class="toggle-inline">
+              <input type="checkbox" id="damsToggle" checked />
+              <span>Show</span>
+            </label>
+          </div>
+          <p class="hint" id="damsHint">Run the flood model to see reservoir filling and overflow risk.</p>
+          <div class="dams-list" id="damsList"></div>
+        </section>
+
+        <section class="panel status-panel">
+          <h2>Model Health</h2>
+          <div class="status-row"><span>Render mode</span><b>2D / 3D</b></div>
+          <div class="status-row"><span>Flood engine</span><b>Local</b></div>
+          <div class="status-row"><span>Data scope</span><b>Saudi regions</b></div>
+        </section>
+      </aside>
+    </div>
+  </div>
+
+  <script id="hydrosim-home-script">
+    window.addEventListener('DOMContentLoaded', function () {
+      var gate = document.getElementById('hydrosimHome');
+      var btn = document.getElementById('homeLogoBtn');
+      if (!gate || !btn) return;
+      btn.addEventListener('click', function () {
+        if (gate.classList.contains('is-exiting')) return;
+        gate.classList.add('is-exiting');
+        window.setTimeout(function () { gate.classList.add('is-hidden'); }, 4700);
+      });
+    });
+  </script>
+
+  <script>
+    if (location.protocol === 'file:') {
+      window.addEventListener('DOMContentLoaded', function () {
+        var m = document.getElementById('loadingMsg');
+        var sp = document.querySelector('.spinner');
+        if (sp) sp.style.display = 'none';
+        if (m) {
+          m.innerHTML = '<strong style="color:#ff8ca0;display:block;margin-bottom:8px;font-size:15px">This app needs a local web server.</strong>' +
+                        '<span style="font-size:13px;line-height:1.5;display:block;max-width:420px;color:#c9d9e8">' +
+                        'Browsers block local data loading when files are opened directly.<br><br>' +
+                        '<strong>Easy fix:</strong> double-click <code>start_windows.bat</code> (Windows) or <code>start_mac_linux.sh</code> (Mac/Linux) in the unzipped folder. It will open HydroSim automatically.<br><br>' +
+                        'Or manually: open a terminal in this folder and run<br>' +
+                        '<code style="background:#071b31;padding:2px 6px;border-radius:0;border:1px solid rgba(37,217,255,.24)">python3 -m http.server 8765</code><br>' +
+                        'then visit <code>http://localhost:8765</code>.' +
+                        '</span>';
+        }
+      });
+    }
+  </script>
+  <script src="./cursor-indicator.js"></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

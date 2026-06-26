@@ -1,0 +1,73 @@
+HydroSim mobile handoff — read this first
+==========================================
+
+FOLDER (send this whole folder to Claude):
+C:\Users\bader\OneDrive\00 - 2025 MVP\A sabtan\HydroSim\HydroSim-V2.0-mobile\handoff\
+
+VERSION CONFIRMATION (as of merge on 2026-06-23)
+------------------------------------------------
+app.js         = POST-Downloads-merge (touch, isCoarsePointer, evtPoint, orientationchange, 3D hide on coarse)
+styles.css     = POST-Downloads-merge + M3+M4 unified tab shell (body scroll lock)
+cursor-indicator.js = POST-Downloads-merge (touch listeners)
+index.html     = mobile-panel classes + data-panel on .nav; NO #mobileTabBar yet
+cursor-indicator.css = FORK (unchanged)
+plan.md        = full task list + decisions
+
+Build next on this baseline: M5 -> M6 -> M7 -> M8.
+M3+M4 done (merged pass): killed duplicate stack blocks; .mobile-panel.is-active model.
+Do NOT merge Downloads again — already applied to app.js/styles.css/cursor-indicator.js.
+
+LIVE FORK (same files after you return edits):
+C:\Users\bader\OneDrive\00 - 2025 MVP\A sabtan\HydroSim\HydroSim-V2.0-mobile\
+
+DOM IDs (index.html) — for M5/M7/M8
+-----------------------------------
+#app
+  #topbar
+  .workspace
+    nav.rail
+      button.nav[data-panel NOT YET — add data-panel="terrain|rain|flood|dams" in M8]
+      button.nav.spacer (Data — optional, no panel)
+    aside#sidebar          -> panel "terrain" controls (layers, region, tools)
+    main#viewport          -> panel "terrain" map (DEFAULT VISIBLE)
+      #readout, #canvasWrap, #mapCanvas, #floodCanvas, #waterCanvas, #damsCanvas, #overlayCanvas
+      #cursorDot, #rgReadout, #threeWrap, #loading, #waterBanner, #profilePanel
+    aside#hydroPanel
+      section.water-panel  -> rain animation sliders + flood model sliders (split rain/flood tabs in M5/M7)
+      section#damsPanel    -> dams list
+      section.status-panel
+
+#mobileTabBar             -> DOES NOT EXIST YET (create in M5)
+
+NAV WIRING TODAY
+----------------
+- .nav rail buttons: DECORATIVE ONLY — no click handlers in app.js
+- activatePanel(id): DOES NOT EXIST — implement in M7
+- M8: wire .nav + #mobileTabBar to activatePanel()
+
+CANVAS / GRID FUNCTIONS (app.js) — M10 refactor targets
+-------------------------------------------------------
+fitCanvas()     ~line 458  — sizes canvases from #canvasWrap; mobile pad=12, desktop pad=32
+canvasToGrid(evt) ~line 647 — expects {clientX, clientY}; uses mapCanvas.getBoundingClientRect() + state.W/H
+onMove(evt)     ~line 669  — calls canvasToGrid(evt), updates #readout
+onProfileClick(evt) — uses canvasToGrid
+onOverviewClick(evt) — uses canvasToGrid
+
+Downloads added:
+  isCoarsePointer() ~line 1488
+  evtPoint(evt)     ~line 1493 — returns {clientX, clientY} from touch or mouse
+  touch handlers in bindUI() pass evtPoint() to onMove / onProfileClick / onOverviewClick
+
+M10 plan: replace canvasToGrid(evt) with getCanvasXY(clientX, clientY) internally;
+           evtPoint() stays the touch/mouse normalizer feeding clientX/Y.
+
+NOT DONE YET
+------------
+- M4 fix (body overflow:hidden; panel scroll; safe-bottom on tab bar)
+- M3 reframe (tabs not stack)
+- M5-M8 tabs + activatePanel
+- getCanvasXY full DPR audit (evtPoint is partial)
+
+RUN
+---
+start_windows.bat in parent folder; needs local server (not file://).

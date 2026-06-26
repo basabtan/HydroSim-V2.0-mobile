@@ -1,0 +1,51 @@
+{
+  "width": 1100,
+  "height": 850,
+  "crs": "EPSG:4326 (geographic)",
+  "is_overview": true,
+  "src_resolution_m": "~1.6 km (downsampled overview)",
+  "bounds": {
+    "lon_min": 33.9998611111,
+    "lon_max": 56.0001406489,
+    "lat_min": 15.9998611111,
+    "lat_max": 33.0001402489
+  },
+  "elevation": {
+    "min": -494,
+    "max": 2896,
+    "mean": 613.0,
+    "nodata": -32768
+  },
+  "twi": {
+    "dtype": "float32",
+    "range": "0..1 percentile-rank flood susceptibility"
+  },
+  "region_boxes": {
+    "makkah_jeddah_taif": [
+      38.976,
+      20.941,
+      40.654,
+      22.075
+    ],
+    "riyadh": [
+      45.8,
+      24.1,
+      47.4,
+      25.3
+    ],
+    "eastern_province": [
+      49.5,
+      25.8,
+      50.8,
+      26.9
+    ],
+    "asir_abha": [
+      42.0,
+      17.7,
+      43.3,
+      18.9
+    ]
+  },
+  "region": "Kingdom of Saudi Arabia (overview)",
+  "phase": "Phase 4 - multi-region"
+}

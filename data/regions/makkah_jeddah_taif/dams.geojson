@@ -1,0 +1,798 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "note": "Phase 2 dams for Makkah-Jeddah-Taif flood model. Capacities from FAO AQUASTAT and Wikidata where verified=true; otherwise estimated from dam height class. Source OSM via Overpass; clustered at 600 m.",
+    "aoi_bbox": [
+      38.97,
+      20.94,
+      40.66,
+      22.08
+    ],
+    "count": 27
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.216589,
+          21.25494
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Naman Dam",
+        "name_ar": "سد وادي نعمان",
+        "capacity_m3": 22000000,
+        "capacity_mcm": 22.0,
+        "height_m": 30,
+        "year": 2015,
+        "material": "concrete",
+        "verified": true,
+        "source": "Regional flood-control dam; est. ~22 MCM",
+        "osm_members": 2,
+        "px": 1177,
+        "py": 821,
+        "snap_acc": 1182,
+        "catchment_cells": 6,
+        "catchment_area_km2": 5.86,
+        "outlet_acc": 6513,
+        "catchment_cells_display": 6513
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.828073,
+          21.725044
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Fatimah Dam",
+        "name_ar": "سد وادي فاطمة",
+        "capacity_m3": 20000000,
+        "capacity_mcm": 20.0,
+        "height_m": 15,
+        "year": 1985,
+        "material": "concrete",
+        "verified": true,
+        "source": "FAO AQUASTAT (SAU dams); 20 MCM",
+        "osm_members": 1,
+        "px": 801,
+        "py": 359,
+        "snap_acc": 1523,
+        "catchment_cells": 466,
+        "catchment_area_km2": 225.56,
+        "outlet_acc": 250619,
+        "catchment_cells_display": 233715
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.455292,
+          21.217911
+        ]
+      },
+      "properties": {
+        "name_en": "Laya Dam (Wadi Layah)",
+        "name_ar": "سد وادي ليه",
+        "capacity_m3": 10000000,
+        "capacity_mcm": 10.0,
+        "height_m": 40,
+        "year": 1982,
+        "material": "concrete",
+        "verified": true,
+        "source": "FAO AQUASTAT; Wikidata Q85776037",
+        "osm_members": 1,
+        "px": 1423,
+        "py": 868,
+        "snap_acc": 5425,
+        "catchment_cells": 0,
+        "catchment_area_km2": 13.85,
+        "outlet_acc": 15386,
+        "catchment_cells_display": 15386
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.48654,
+          21.166251
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Thumala Dam",
+        "name_ar": "سد وادي ثمالة",
+        "capacity_m3": 8000000,
+        "capacity_mcm": 8.0,
+        "height_m": 20,
+        "year": null,
+        "material": "earth",
+        "verified": true,
+        "source": "Estimated from height class",
+        "osm_members": 1,
+        "px": 1440,
+        "py": 911,
+        "snap_acc": 18014,
+        "catchment_cells": 709,
+        "catchment_area_km2": 1.26,
+        "outlet_acc": 1400,
+        "catchment_cells_display": 1400
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.383641,
+          21.23886
+        ]
+      },
+      "properties": {
+        "name_en": "Saab Dam",
+        "name_ar": "سد صعب",
+        "capacity_m3": 5000000,
+        "capacity_mcm": 5.0,
+        "height_m": 18,
+        "year": null,
+        "material": "earth",
+        "verified": true,
+        "source": "Estimated",
+        "osm_members": 1,
+        "px": 1336,
+        "py": 837,
+        "snap_acc": 116446,
+        "catchment_cells": 3,
+        "catchment_area_km2": 17.5,
+        "outlet_acc": 19446,
+        "catchment_cells_display": 13989
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.512298,
+          21.129302
+        ]
+      },
+      "properties": {
+        "name_en": "Al-Samlaqi Dam",
+        "name_ar": "سد السملقي",
+        "capacity_m3": 4000000,
+        "capacity_mcm": 4.0,
+        "height_m": 15,
+        "year": null,
+        "material": "earth",
+        "verified": true,
+        "source": "Estimated",
+        "osm_members": 1,
+        "px": 1466,
+        "py": 949,
+        "snap_acc": 3714,
+        "catchment_cells": 421,
+        "catchment_area_km2": 3.11,
+        "outlet_acc": 3459,
+        "catchment_cells_display": 1146
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.319816,
+          21.588354
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Al-Aslaa Dam",
+        "name_ar": "سد وادي العصلاء",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 316,
+        "py": 501,
+        "snap_acc": 637,
+        "catchment_cells": 19,
+        "catchment_area_km2": 19.11,
+        "outlet_acc": 21230,
+        "catchment_cells_display": 21230
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.505286,
+          21.119935
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #2",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 1461,
+        "py": 958,
+        "snap_acc": 4490,
+        "catchment_cells": 283,
+        "catchment_area_km2": 2.08,
+        "outlet_acc": 2313,
+        "catchment_cells_display": 2313
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.890981,
+          21.426509
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #3",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 2,
+        "px": 885,
+        "py": 664,
+        "snap_acc": 576,
+        "catchment_cells": 4,
+        "catchment_area_km2": 0.3,
+        "outlet_acc": 333,
+        "catchment_cells_display": 333
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.142293,
+          21.690984
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #4",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 166,
+        "py": 378,
+        "snap_acc": 100,
+        "catchment_cells": 12,
+        "catchment_area_km2": 9.81,
+        "outlet_acc": 10900,
+        "catchment_cells_display": 6811
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.253462,
+          21.667018
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #5",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 3,
+        "px": 253,
+        "py": 421,
+        "snap_acc": 269,
+        "catchment_cells": 1,
+        "catchment_area_km2": 3.68,
+        "outlet_acc": 4089,
+        "catchment_cells_display": 4089
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.327056,
+          21.16673
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #6",
+        "name_ar": "سد",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 1288,
+        "py": 911,
+        "snap_acc": 3703,
+        "catchment_cells": 127,
+        "catchment_area_km2": 4.91,
+        "outlet_acc": 5457,
+        "catchment_cells_display": 5457
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.882769,
+          21.422396
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #7",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 866,
+        "py": 675,
+        "snap_acc": 734,
+        "catchment_cells": 30,
+        "catchment_area_km2": 0.17,
+        "outlet_acc": 193,
+        "catchment_cells_display": 51
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.873015,
+          21.42643
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #8",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 861,
+        "py": 671,
+        "snap_acc": 1671,
+        "catchment_cells": 11,
+        "catchment_area_km2": 0.13,
+        "outlet_acc": 142,
+        "catchment_cells_display": 142
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.252503,
+          21.643886
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #9",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 2,
+        "px": 252,
+        "py": 442,
+        "snap_acc": 188,
+        "catchment_cells": 42,
+        "catchment_area_km2": 4.06,
+        "outlet_acc": 4505,
+        "catchment_cells_display": 0
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.252416,
+          21.639833
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #10",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 252,
+        "py": 442,
+        "snap_acc": 182,
+        "catchment_cells": 21,
+        "catchment_area_km2": 4.06,
+        "outlet_acc": 4505,
+        "catchment_cells_display": 4505
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.239184,
+          21.721897
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Umm Hablayn Dam",
+        "name_ar": "سد وادي ام حبلين",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 242,
+        "py": 371,
+        "snap_acc": 165,
+        "catchment_cells": 15,
+        "catchment_area_km2": 3.07,
+        "outlet_acc": 3406,
+        "catchment_cells_display": 250
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.234912,
+          21.727352
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #12",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 249,
+        "py": 365,
+        "snap_acc": 137,
+        "catchment_cells": 0,
+        "catchment_area_km2": 2.84,
+        "outlet_acc": 3156,
+        "catchment_cells_display": 3156
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.267205,
+          21.789594
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #13",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 279,
+        "py": 302,
+        "snap_acc": 193,
+        "catchment_cells": 0,
+        "catchment_area_km2": 3.33,
+        "outlet_acc": 3698,
+        "catchment_cells_display": 3698
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.270315,
+          21.784184
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Ghaya Dam",
+        "name_ar": "سد وادي غيا",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 276,
+        "py": 307,
+        "snap_acc": 485,
+        "catchment_cells": 170,
+        "catchment_area_km2": 3.34,
+        "outlet_acc": 3713,
+        "catchment_cells_display": 15
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.2497,
+          21.822897
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Mareekh Dam",
+        "name_ar": "سد وادي مريخ",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 3,
+        "px": 249,
+        "py": 268,
+        "snap_acc": 1418,
+        "catchment_cells": 74,
+        "catchment_area_km2": 2.72,
+        "outlet_acc": 3019,
+        "catchment_cells_display": 3019
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.138705,
+          21.509108
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Al-Bujaydi Dam",
+        "name_ar": "سد وادي البجيدي",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 1097,
+        "py": 584,
+        "snap_acc": 1364,
+        "catchment_cells": 111,
+        "catchment_area_km2": 9.35,
+        "outlet_acc": 10391,
+        "catchment_cells_display": 10391
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.338862,
+          21.463447
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Mathwab II Dam",
+        "name_ar": "سد وادي مثوب الثاني",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 2,
+        "px": 335,
+        "py": 633,
+        "snap_acc": 734,
+        "catchment_cells": 34,
+        "catchment_area_km2": 2.67,
+        "outlet_acc": 2969,
+        "catchment_cells_display": 2245
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.39481,
+          21.475219
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Mathwab I Dam",
+        "name_ar": "سد وادي مثوب الأول",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 387,
+        "py": 619,
+        "snap_acc": 1923,
+        "catchment_cells": 56,
+        "catchment_area_km2": 0.65,
+        "outlet_acc": 724,
+        "catchment_cells_display": 724
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.258028,
+          21.574864
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #19",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 257,
+        "py": 511,
+        "snap_acc": 419,
+        "catchment_cells": 46,
+        "catchment_area_km2": 21.87,
+        "outlet_acc": 24294,
+        "catchment_cells_display": 3064
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          40.400231,
+          21.589845
+        ]
+      },
+      "properties": {
+        "name_en": "Wadi Qarn Al-Sayl Al-Kabir Dam",
+        "name_ar": "سد وادي قرن السيل الكبير",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 1352,
+        "py": 481,
+        "snap_acc": 14021,
+        "catchment_cells": 331,
+        "catchment_area_km2": 15.21,
+        "outlet_acc": 16904,
+        "catchment_cells_display": 16904
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          39.23151,
+          21.494188
+        ]
+      },
+      "properties": {
+        "name_en": "Check dam #21",
+        "name_ar": "",
+        "capacity_m3": 2000000,
+        "capacity_mcm": 2.0,
+        "height_m": null,
+        "year": null,
+        "material": null,
+        "verified": false,
+        "source": "Estimated (default small dam)",
+        "osm_members": 1,
+        "px": 232,
+        "py": 579,
+        "snap_acc": 90,
+        "catchment_cells": 18,
+        "catchment_area_km2": 3.42,
+        "outlet_acc": 3804,
+        "catchment_cells_display": 3804
+      }
+    }
+  ]
+}
