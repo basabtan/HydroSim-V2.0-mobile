@@ -57,7 +57,12 @@
 
 ---
 
-## Quick test on phone (same Wi‑Fi)
+## Quick test on phone
+
+**Live (GitHub Pages):** https://basabtan.github.io/HydroSim-V2.0-mobile/  
+*(May take 1–2 min after first push to go live.)*
+
+**Same Wi‑Fi (local):**
 
 1. On PC: `ipconfig` → note IPv4 (e.g. `192.168.1.x`)
 2. Allow firewall for port 8765 if prompted
