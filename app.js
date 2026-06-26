@@ -1539,7 +1539,7 @@ function activatePanel(id) {
   const valid = ['terrain', 'rain', 'flood', 'dams'];
   if (!valid.includes(id)) return;
 
-  document.querySelectorAll('.rail .nav[data-panel], #mobileTabBar .tab-btn[data-panel]').forEach(btn => {
+  document.querySelectorAll('#mobileTabBar .tab-btn[data-panel]').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.panel === id);
   });
 
@@ -1599,7 +1599,7 @@ function bindMobilePanelCollapse() {
 }
 
 function bindPanelNav() {
-  document.querySelectorAll('.rail .nav[data-panel], #mobileTabBar .tab-btn[data-panel]').forEach(btn => {
+  document.querySelectorAll('#mobileTabBar .tab-btn[data-panel]').forEach(btn => {
     btn.addEventListener('click', () => activatePanel(btn.dataset.panel));
   });
   document.getElementById('layersBtn')?.addEventListener('click', openLayersSheet);

@@ -189,7 +189,7 @@ button { user-select: none; }
 /* ---------- Workspace ---------- */
 .workspace {
   display: grid;
-  grid-template-columns: 78px 320px minmax(420px, 1fr) 330px;
+  grid-template-columns: 320px minmax(420px, 1fr) 330px;
   min-height: 0;
   height: calc(100vh - 104px);
 }
@@ -786,13 +786,13 @@ button { user-select: none; }
 @media (max-width: 1260px) {
   #topbar { grid-template-columns: minmax(520px, 1fr) 260px 180px 160px; }
   #topbar .top-item:nth-last-child(1) { display: none; }
-  .workspace { grid-template-columns: 72px 300px minmax(420px, 1fr) 310px; }
+  .workspace { grid-template-columns: 300px minmax(420px, 1fr) 310px; }
 }
 
 @media (max-width: 1080px) {
   #topbar { grid-template-columns: minmax(430px, 1fr) 1fr; }
   #topbar .top-item { display: none; }
-  .workspace { grid-template-columns: 72px 286px minmax(420px, 1fr); }
+  .workspace { grid-template-columns: 286px minmax(420px, 1fr); }
   #hydroPanel { display: none; }
 }
 
@@ -992,7 +992,7 @@ button { user-select: none; }
   grid-template-columns: minmax(540px, 690px) minmax(250px,1fr) 180px 190px 155px;
 }
 .workspace {
-  grid-template-columns: 78px 338px minmax(440px, 1fr) 352px;
+  grid-template-columns: 338px minmax(440px, 1fr) 352px;
 }
 #sidebar,
 #hydroPanel {
@@ -1197,12 +1197,12 @@ button { user-select: none; }
 @media (max-width: 1360px) {
   #topbar { grid-template-columns: minmax(500px, 1fr) 250px 170px 170px; }
   #topbar .top-item:nth-last-child(1) { display: none; }
-  .workspace { grid-template-columns: 72px 318px minmax(420px, 1fr) 330px; }
+  .workspace { grid-template-columns: 318px minmax(420px, 1fr) 330px; }
 }
 @media (max-width: 1120px) {
   #topbar { grid-template-columns: minmax(430px, 1fr) 1fr; }
   #topbar .top-item { display: none; }
-  .workspace { grid-template-columns: 72px 300px minmax(420px, 1fr); }
+  .workspace { grid-template-columns: 300px minmax(420px, 1fr); }
   #hydroPanel { display: none; }
 }
 /* ----- M2: Mobile topbar (max-width: 860px) — wins over earlier topbar rules ----- */
