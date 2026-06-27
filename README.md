@@ -8,6 +8,30 @@ Rainfall-driven flood prediction system for Saudi Arabia. A Kingdom-wide overvie
 for navigation plus four full-resolution (~30 m) flood-analysis regions, each with
 its own terrain, hydrology, dams and rainfall-runoff flood model.
 
+## Phase 5 — Cinematic Render Mode (new)
+
+A dedicated **presentation skin** for reports, figures and clips. It is purely
+visual — the real flood analysis is unchanged; this mode only renders the active
+region's DEM as an appealing, approximate 3D scene. It stays fully dormant until
+the **Cinematic mode** toggle (Visualization panel) is switched on.
+
+What it adds (all behind the one toggle):
+
+- **3D terrain** displaced from the live elevation grid, vertex-coloured by the
+  shared elevation ramp, on a deep night-sky background.
+- **Glowing river network** — channels derived from flow accumulation, rendered
+  as emissive cyan points that bloom into the "blue wadi" look.
+- **Animated water** particles flowing downhill along the D8 flow directions.
+- **Bloom + ACES filmic tone mapping** post-processing for the cinematic glow.
+- **City labels**, a live **compass**, and a reused **metrics HUD**.
+- **Controls**: vertical exaggeration, glow intensity, river threshold, water
+  speed, animated-water / labels / auto-orbit toggles.
+- **Export**: high-res **PNG** frame and a **recorded orbit clip** (MP4/WebM).
+
+Implemented as a self-contained module (`cinematic.js` + `cinematic.css`) that
+reads the live sim state through a read-only `window.HydroSim` bridge, so the
+working simulator code is left untouched.
+
 ## Phase 4 — Multi-region scope + live rain controls (new)
 
 The viewer is no longer limited to a single area. You can now choose the **scope**

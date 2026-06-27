@@ -12,6 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./cursor-indicator.css" />
+  <link rel="stylesheet" href="./cinematic.css" />
 </head>
 <body>
 
@@ -109,6 +110,10 @@
             <input type="checkbox" id="threeToggle" />
           </label>
           <label class="toggle-row">
+            <span>Cinematic mode</span>
+            <input type="checkbox" id="cinematicToggle" />
+          </label>
+          <label class="toggle-row">
             <span>Cursor indicator</span>
             <input type="checkbox" id="cursorIndToggle" checked />
           </label>
@@ -176,6 +181,46 @@
           </div>
 
           <div id="threeWrap" class="hidden"></div>
+
+          <!-- ===== Cinematic Mode (dormant until toggled) ===== -->
+          <div id="cinematicStage" class="hidden"></div>
+          <div id="cineCompass" class="hidden">
+            <span class="cc-n">N</span>
+            <div id="cineCompassNeedle"></div>
+          </div>
+          <div id="cineHUD" class="hidden">
+            <div class="hud-cell"><div class="hud-k">Region</div><div class="hud-v" id="cineRegion">—</div></div>
+            <div class="hud-cell"><div class="hud-k">Elevation</div><div class="hud-v" id="cineElevRange">—</div></div>
+            <div class="hud-cell"><div class="hud-k">Coverage</div><div class="hud-v" id="cineCoverage">—</div></div>
+            <div class="hud-cell"><div class="hud-k">Resolution</div><div class="hud-v" id="cineRes">—</div></div>
+            <div class="hud-cell"><div class="hud-k">Flow accum.</div><div class="hud-v" id="cineFlowMax">—</div></div>
+          </div>
+          <div id="cinematicPanel" class="hidden">
+            <h3>Cinematic Render</h3>
+            <div class="cine-row">
+              <label>Vertical exaggeration <span class="val" id="cineExagVal">1.0×</span></label>
+              <input type="range" id="cineExag" min="0.3" max="3" step="0.1" value="1.0" />
+            </div>
+            <div class="cine-row">
+              <label>Glow intensity <span class="val" id="cineGlowVal">0.85</span></label>
+              <input type="range" id="cineGlow" min="0" max="3" step="0.05" value="0.85" />
+            </div>
+            <div class="cine-row">
+              <label>River threshold <span class="val" id="cineThreshVal">35%</span></label>
+              <input type="range" id="cineThresh" min="10" max="75" step="1" value="35" />
+            </div>
+            <div class="cine-row">
+              <label>Water speed <span class="val" id="cineWaterSpeedVal">1.0×</span></label>
+              <input type="range" id="cineWaterSpeed" min="0.25" max="3" step="0.25" value="1.0" />
+            </div>
+            <label class="cine-check">Animated water <input type="checkbox" id="cineWaterToggle" checked /></label>
+            <label class="cine-check">City labels <input type="checkbox" id="cineLabelsToggle" checked /></label>
+            <label class="cine-check">Auto-orbit camera <input type="checkbox" id="cineOrbitToggle" /></label>
+            <div class="cine-divider"></div>
+            <button class="cine-btn" id="cinePngBtn">⤓ Export PNG frame</button>
+            <button class="cine-btn" id="cineMp4Btn">● Record orbit clip</button>
+          </div>
+
           <div id="loading" class="loading"><div class="spinner"></div><p id="loadingMsg">Loading HydroSim terrain…</p></div>
         </div>
 
@@ -320,5 +365,20 @@
   </script>
   <script src="./cursor-indicator.js"></script>
   <script type="module" src="./app.js"></script>
+  <script type="module">
+    import { setCinematic } from './cinematic.js';
+    const cineToggle = document.getElementById('cinematicToggle');
+    const cineEls = ['cineCompass', 'cineHUD'];
+    cineToggle?.addEventListener('change', e => {
+      const on = e.target.checked;
+      // If the legacy 3D mode is on, turn it off first (mutually exclusive views).
+      if (on) {
+        const t3 = document.getElementById('threeToggle');
+        if (t3 && t3.checked) { t3.checked = false; t3.dispatchEvent(new Event('change')); }
+      }
+      cineEls.forEach(id => document.getElementById(id)?.classList.toggle('hidden', !on));
+      setCinematic(on);
+    });
+  </script>
 </body>
 </html>

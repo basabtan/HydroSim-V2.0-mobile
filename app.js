@@ -1838,4 +1838,32 @@ function bindUI() {
   }
 }
 
+// ---------------- Cinematic Mode bridge ----------------
+// Exposes the live sim state + helpers to the self-contained cinematic.js module
+// WITHOUT coupling the working sim to it. Cinematic Mode reads this bridge only
+// when its toggle is switched on; nothing here runs otherwise. Keeping the real
+// analysis untouched is intentional — Cinematic Mode is a presentation skin only.
+window.HydroSim = {
+  get state() { return state; },
+  get DATA() { return DATA; },
+  get REGIONS() { return REGIONS; },
+  // geometry / sampling helpers (read-only use)
+  elevAt, dtmAt, gridToLatLon,
+  // colour ramps so the cinematic terrain matches the 2D legend exactly
+  elevColorRGB,
+  // City label anchors (lon/lat). Drawn as 3D markers in cinematic view; only
+  // those falling inside the active region's bounds are shown.
+  CITIES: [
+    { name: 'Riyadh', lat: 24.7136, lon: 46.6753 },
+    { name: 'Jeddah', lat: 21.4858, lon: 39.1925 },
+    { name: 'Makkah', lat: 21.3891, lon: 39.8579 },
+    { name: 'Taif', lat: 21.2703, lon: 40.4158 },
+    { name: 'Madinah', lat: 24.5247, lon: 39.5692 },
+    { name: 'Dammam', lat: 26.4207, lon: 50.0888 },
+    { name: 'Al Khobar', lat: 26.2794, lon: 50.2083 },
+    { name: 'Abha', lat: 18.2164, lon: 42.5053 },
+    { name: 'Khamis Mushait', lat: 18.3060, lon: 42.7297 },
+  ],
+};
+
 boot();
