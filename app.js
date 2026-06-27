@@ -38,6 +38,7 @@ const state = {
     rainDepth: 30,   // mm total
     rainDur: 2,      // hours
     infil: 0,        // 0=low, 1=med, 2=high, 3=very-high
+    advanced: false, // Advanced mode: derive rain intensity from i = P/T and show Jeddah IDF return period
     lastResult: null // { floodedCells, maxDepth, totalVolumeM3, peakFlowM3s }
   },
   dams: {
@@ -1059,6 +1060,59 @@ const INFIL_PRESETS = [
   { name: 'Very high (vegetated)',baseRunoff: 0.12, infilMM: 50 },
 ];
 
+// ---------------- Jeddah IDF design storms (Advanced mode) ----------------
+// Regional frequency analysis depths (mm) anchored to Awadallah regional IDF
+// curves and the Jeddah/Madinah frequency studies. The 50-yr (~94 mm) and
+// 100-yr (~106 mm) depths bracket the catastrophic Nov-2009 (~90 mm / 4 h) and
+// Jan-2011 (~111 mm / ~4.7 h) flash floods used here as calibration events.
+// Sources: Awadallah regional IDF (J. Flood Risk Mgmt 2014); Hadadin et al.
+// (Arab J Sci Eng 2013); Azeez & Elfeki (Nat Hazards 2019); UTM MJCE 2016.
+const JEDDAH_IDF = [   // ascending depth; pick nearest-at-or-below for the label
+  { years: 2,   depth: 18,  note: '' },
+  { years: 5,   depth: 29,  note: '' },
+  { years: 10,  depth: 44,  note: '' },
+  { years: 25,  depth: 69,  note: '' },
+  { years: 50,  depth: 94,  note: 'comparable to the Nov 2009 flood' },
+  { years: 100, depth: 106, note: 'comparable to the Jan 2011 flood' },
+];
+
+// Storm intensity i = P / T (mm/h). Jeddah "heavy rain" threshold = 25 mm/h.
+function stormIntensity(P, T) { return T > 0 ? P / T : 0; }
+function intensityBand(i) {
+  if (i < 2)  return 'Light';
+  if (i < 10) return 'Moderate';
+  if (i < 25) return 'Heavy';
+  if (i < 50) return 'Torrential';
+  return 'Extreme';
+}
+// Map computed intensity (mm/h) onto the 1-10 animation drop-density scale.
+function intensityToAnim(i) {
+  return Math.max(1, Math.min(10, Math.round(1 + i / 5)));
+}
+// Classify a rainfall depth against the Jeddah IDF table -> return-period label.
+function returnPeriodLabel(P) {
+  let band = null;
+  for (const r of JEDDAH_IDF) { if (P >= r.depth) band = r; }
+  if (!band) return `< 2-yr storm (${P} mm)`;
+  const top = JEDDAH_IDF[JEDDAH_IDF.length - 1];
+  const ge = (band === top && P > top.depth) ? '≥' : '≈';
+  let s = `${ge}${band.years}-yr storm`;
+  if (band.note) s += ` — ${band.note}`;
+  return s;
+}
+// Live storm summary shown under the depth slider in Advanced mode.
+function updateStormReadout() {
+  const el = document.getElementById('stormReadout');
+  if (!el) return;
+  if (!state.flood.advanced) { el.style.display = 'none'; return; }
+  const P = state.flood.rainDepth, T = state.flood.rainDur;
+  const i = stormIntensity(P, T);
+  el.style.display = 'block';
+  el.innerHTML =
+    `Intensity <b>${i.toFixed(1)} mm/h</b> (${intensityBand(i)}) ` +
+    `· ${returnPeriodLabel(P)}`;
+}
+
 function computeSlopeFromFlow(i) {
   // Approximate slope magnitude from flow direction dx,dy and neighbour elev.
   const fi = i * 2;
@@ -1262,6 +1316,7 @@ function runFloodModel() {
       <div>Max depth: <b>${maxDepth.toFixed(2)} m</b></div>
       <div>Peak discharge: <b>${(peakQ).toLocaleString(undefined,{maximumFractionDigits:1})} m³/s</b></div>
       <div>Runoff volume: <b>${(totalVolume/1e6).toFixed(2)} M m³</b></div>
+      ${state.flood.advanced ? `<div>Intensity: <b>${stormIntensity(P,T).toFixed(1)} mm/h</b> (${intensityBand(stormIntensity(P,T))}) · <b>${returnPeriodLabel(P)}</b></div>` : ''}
       <div class="hint-sub">Storm: ${P} mm over ${T} h → effective ${Pe.toFixed(1)} mm · ${preset.name}</div>
       <div class="hint-sub">Compute: ${state.flood.lastResult.runtime} ms</div>
     </div>`;
@@ -1694,13 +1749,41 @@ function bindUI() {
   const rainDepthVal = document.getElementById('rainDepthVal');
   const rainDurVal   = document.getElementById('rainDurVal');
   const infilVal     = document.getElementById('infilVal');
+
+  // In Advanced mode the visual rain animation is DERIVED from the physical
+  // storm: intensity i = P / T drives drop density, so the animation can never
+  // contradict the flood model. Also keeps the standalone intensity slider in sync.
+  function syncRainFromStorm() {
+    if (!state.flood.advanced) return;
+    const i = stormIntensity(state.flood.rainDepth, state.flood.rainDur);
+    state.rain.intensity = intensityToAnim(i);
+    const ri = document.getElementById('rainIntensity');
+    const riVal = document.getElementById('rainIntVal');
+    if (ri) ri.value = state.rain.intensity;
+    if (riVal) riVal.textContent = intensityBand(i);
+  }
+
   rainDepth.addEventListener('input', e => {
     state.flood.rainDepth = +e.target.value;
     rainDepthVal.textContent = `${state.flood.rainDepth} mm`;
+    syncRainFromStorm();
+    updateStormReadout();
   });
   rainDur.addEventListener('input', e => {
     state.flood.rainDur = +e.target.value;
     rainDurVal.textContent = `${state.flood.rainDur} h`;
+    syncRainFromStorm();
+    updateStormReadout();
+  });
+
+  // Advanced mode toggle: link visual intensity to i = P/T and show IDF readout.
+  const advToggle = document.getElementById('advModeToggle');
+  if (advToggle) advToggle.addEventListener('change', e => {
+    state.flood.advanced = e.target.checked;
+    const ri = document.getElementById('rainIntensity');
+    if (ri) ri.disabled = state.flood.advanced;  // derived, not manually set, in Advanced mode
+    if (state.flood.advanced) syncRainFromStorm();
+    updateStormReadout();
   });
   infil.addEventListener('input', e => {
     state.flood.infil = +e.target.value;
