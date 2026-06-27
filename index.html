@@ -205,10 +205,15 @@
         <div class="mobile-group" data-group="flood">
           <section class="panel water-panel">
             <h2>Rainfall-Runoff Flood Simulation</h2>
+            <label class="toggle-inline" style="margin-bottom:10px;display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="advModeToggle" />
+              <span>Advanced mode (Jeddah IDF design storms)</span>
+            </label>
             <div class="slider-block">
               <label>Rainfall depth <span id="rainDepthVal" class="slider-num">30 mm</span></label>
               <input type="range" id="rainDepth" min="0" max="200" value="30" step="5" />
             </div>
+            <div class="flood-readout" id="stormReadout" style="display:none;font-size:12px;line-height:1.5;margin:4px 0 8px;"></div>
             <div class="slider-block">
               <label>Storm duration <span id="rainDurVal" class="slider-num">2 h</span></label>
               <input type="range" id="rainDur" min="1" max="24" value="2" />
