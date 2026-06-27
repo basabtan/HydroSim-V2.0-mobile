@@ -1,53 +1,58 @@
 {
-  "width": 1600,
-  "height": 1546,
-  "src_width": 4580,
-  "src_height": 4423,
-  "src_resolution_m": 30,
-  "crs": "EPSG:32638 (UTM zone 38N)",
-  "utm_epsg": 32638,
-  "data_source": "Kingdom-wide sink-filled DEM (~30m, EPSG:4326) clipped to AOI; hydrology recomputed with pysheds",
-  "bounds": {
-    "lon_min": 42.0,
-    "lon_max": 43.3,
-    "lat_min": 17.7,
-    "lat_max": 18.9
-  },
-  "area_km": {
-    "width": 137.4,
-    "height": 132.7
-  },
-  "region": "Asir / Abha Highlands, Saudi Arabia",
-  "region_key": "asir_abha",
-  "elevation": {
-    "min": 1,
-    "max": 2989,
-    "mean": 1502.0,
-    "nodata": -32768
-  },
-  "flowacc": {
-    "max": 595448,
-    "dtype": "uint32",
-    "channel_threshold": 500,
-    "major_channel_threshold": 5000
-  },
-  "twi": {
-    "dtype": "float32",
-    "range": "0..1 percentile-rank flood susceptibility",
-    "note": "0 = driest land cell, 1 = wettest; scale-invariant"
-  },
-  "slope": {
-    "dtype": "float32",
-    "units": "degrees"
-  },
-  "dtm": {
-    "dtype": "int16",
-    "units": "meters",
-    "nodata": -32768,
-    "min": 1,
-    "max": 2989,
-    "mean": 1501.8,
-    "source": "authoritative bare-earth DTM clipped + reprojected"
-  },
-  "phase": "Phase 4 - multi-region"
+ "width": 1600,
+ "height": 1546,
+ "src_width": 4580,
+ "src_height": 4423,
+ "src_resolution_m": 30,
+ "crs": "EPSG:32638 (UTM zone 38N)",
+ "utm_epsg": 32638,
+ "data_source": "Kingdom-wide sink-filled DEM (~30m, EPSG:4326) clipped to AOI; hydrology recomputed with pysheds",
+ "bounds": {
+  "lon_min": 42.0,
+  "lon_max": 43.3,
+  "lat_min": 17.7,
+  "lat_max": 18.9
+ },
+ "area_km": {
+  "width": 137.4,
+  "height": 132.7
+ },
+ "region": "Asir / Abha Highlands, Saudi Arabia",
+ "region_key": "asir_abha",
+ "elevation": {
+  "min": 1,
+  "max": 2989,
+  "mean": 1502.0,
+  "nodata": -32768
+ },
+ "flowacc": {
+  "max": 595448,
+  "dtype": "uint32",
+  "channel_threshold": 500,
+  "major_channel_threshold": 5000
+ },
+ "twi": {
+  "dtype": "float32",
+  "range": "0..1 percentile-rank flood susceptibility",
+  "note": "0 = driest land cell, 1 = wettest; scale-invariant"
+ },
+ "slope": {
+  "dtype": "float32",
+  "units": "degrees"
+ },
+ "dtm": {
+  "dtype": "int16",
+  "units": "meters",
+  "nodata": -32768,
+  "min": 1,
+  "max": 2989,
+  "mean": 1501.8,
+  "source": "authoritative bare-earth DTM clipped + reprojected"
+ },
+ "phase": "Phase 4 - multi-region",
+ "has_catchments": true,
+ "catchment": {
+  "method": "D8 reverse-fill from max-flowacc snap",
+  "cell_area_km2": 0.007371
+ }
 }

@@ -28,7 +28,7 @@
   "channel_threshold": 500,
   "major_channel_threshold": 5000
  },
- "region": "Makkah \u2013 Jeddah \u2013 Taif, Saudi Arabia",
+ "region": "Makkah – Jeddah – Taif, Saudi Arabia",
  "twi": {
   "dtype": "float32",
   "range": "0..1 percentile-rank flood susceptibility",
@@ -53,5 +53,9 @@
  "phase": "Phase 4 - multi-region",
  "utm_epsg": 32637,
  "region_key": "makkah_jeddah_taif",
- "has_catchments": true
+ "has_catchments": true,
+ "catchment": {
+  "method": "D8 reverse-fill from max-flowacc snap",
+  "cell_area_km2": 0.01196
+ }
 }

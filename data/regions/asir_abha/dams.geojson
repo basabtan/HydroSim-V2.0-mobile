@@ -11,7 +11,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0639\u062a\u0648\u062f",
+    "name_en": "سد عتود",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -20,7 +20,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 390.075,
+    "px": 883,
+    "py": 820,
+    "snap_acc": 52920,
+    "outlet_acc": 52920,
+    "catchment_cells": 52920,
+    "catchment_cells_display": 52920
    }
   },
   {
@@ -33,7 +39,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0628\u0647\u0627",
+    "name_en": "سد ابها",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -42,7 +48,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 51.479,
+    "px": 600,
+    "py": 882,
+    "snap_acc": 6984,
+    "outlet_acc": 6984,
+    "catchment_cells": 6984,
+    "catchment_cells_display": 6984
    }
   },
   {
@@ -64,7 +76,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 2.484,
+    "px": 551,
+    "py": 783,
+    "snap_acc": 337,
+    "outlet_acc": 337,
+    "catchment_cells": 337,
+    "catchment_cells_display": 337
    }
   },
   {
@@ -86,7 +104,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 37.437,
+    "px": 1060,
+    "py": 796,
+    "snap_acc": 5079,
+    "outlet_acc": 5079,
+    "catchment_cells": 5079,
+    "catchment_cells_display": 5079
    }
   },
   {
@@ -108,7 +132,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 21.243,
+    "px": 901,
+    "py": 668,
+    "snap_acc": 2882,
+    "outlet_acc": 2882,
+    "catchment_cells": 2882,
+    "catchment_cells_display": 2882
    }
   },
   {
@@ -130,7 +160,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 20.624,
+    "px": 906,
+    "py": 671,
+    "snap_acc": 2798,
+    "outlet_acc": 2798,
+    "catchment_cells": 2798,
+    "catchment_cells_display": 2798
    }
   },
   {
@@ -152,7 +188,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 390.075,
+    "px": 883,
+    "py": 820,
+    "snap_acc": 52920,
+    "outlet_acc": 52920,
+    "catchment_cells": 52920,
+    "catchment_cells_display": 52920
    }
   },
   {
@@ -174,7 +216,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 61.504,
+    "px": 809,
+    "py": 780,
+    "snap_acc": 8344,
+    "outlet_acc": 8344,
+    "catchment_cells": 8344,
+    "catchment_cells_display": 8344
    }
   },
   {
@@ -196,7 +244,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 61.504,
+    "px": 809,
+    "py": 780,
+    "snap_acc": 8344,
+    "outlet_acc": 8344,
+    "catchment_cells": 8344,
+    "catchment_cells_display": 8344
    }
   },
   {
@@ -218,7 +272,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.944,
+    "px": 1364,
+    "py": 982,
+    "snap_acc": 942,
+    "outlet_acc": 942,
+    "catchment_cells": 942,
+    "catchment_cells_display": 942
    }
   },
   {
@@ -240,7 +300,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.575,
+    "px": 1398,
+    "py": 986,
+    "snap_acc": 78,
+    "outlet_acc": 78,
+    "catchment_cells": 78,
+    "catchment_cells_display": 78
    }
   },
   {
@@ -262,7 +328,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 4.732,
+    "px": 1167,
+    "py": 1083,
+    "snap_acc": 642,
+    "outlet_acc": 642,
+    "catchment_cells": 642,
+    "catchment_cells_display": 642
    }
   },
   {
@@ -284,7 +356,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 3.088,
+    "px": 1173,
+    "py": 1085,
+    "snap_acc": 419,
+    "outlet_acc": 419,
+    "catchment_cells": 419,
+    "catchment_cells_display": 419
    }
   },
   {
@@ -297,7 +375,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644 \u062d\u062f\u064a\u0644\u0629",
+    "name_en": "سد ال حديلة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -306,7 +384,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 4.459,
+    "px": 998,
+    "py": 1091,
+    "snap_acc": 605,
+    "outlet_acc": 605,
+    "catchment_cells": 605,
+    "catchment_cells_display": 605
    }
   },
   {
@@ -319,7 +403,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0627\u062f\u064a \u0639\u0634\u0631\u0627\u0646",
+    "name_en": "سد وادي عشران",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -328,7 +412,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 33.87,
+    "px": 543,
+    "py": 810,
+    "snap_acc": 4595,
+    "outlet_acc": 4595,
+    "catchment_cells": 4595,
+    "catchment_cells_display": 4595
    }
   },
   {
@@ -341,7 +431,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u063a\u0627\u0644",
+    "name_en": "سد الغال",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -350,7 +440,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 99.914,
+    "px": 497,
+    "py": 639,
+    "snap_acc": 13555,
+    "outlet_acc": 13555,
+    "catchment_cells": 13555,
+    "catchment_cells_display": 13555
    }
   },
   {
@@ -363,7 +459,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0637\u0628\u0628",
+    "name_en": "سد طبب",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -372,7 +468,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 10.887,
+    "px": 449,
+    "py": 683,
+    "snap_acc": 1477,
+    "outlet_acc": 1477,
+    "catchment_cells": 1477,
+    "catchment_cells_display": 1477
    }
   },
   {
@@ -394,7 +496,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 151.055,
+    "px": 582,
+    "py": 242,
+    "snap_acc": 20493,
+    "outlet_acc": 20493,
+    "catchment_cells": 20493,
+    "catchment_cells_display": 20493
    }
   },
   {
@@ -407,7 +515,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0627\u062f\u064a \u0639\u062a\u0648\u062f \u062a\u0647\u0627\u0645\u0629",
+    "name_en": "سد وادي عتود تهامة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -416,7 +524,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 497.036,
+    "px": 583,
+    "py": 1283,
+    "snap_acc": 67431,
+    "outlet_acc": 67431,
+    "catchment_cells": 67431,
+    "catchment_cells_display": 67431
    }
   },
   {
@@ -429,7 +543,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0633\u0645\u0627\u0646",
+    "name_en": "سد سمان",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -438,7 +552,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.796,
+    "px": 1561,
+    "py": 333,
+    "snap_acc": 108,
+    "outlet_acc": 108,
+    "catchment_cells": 108,
+    "catchment_cells_display": 108
    }
   },
   {
@@ -451,7 +571,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0627\u062f\u064a \u062a\u0646\u062f\u062d\u0629",
+    "name_en": "سد وادي تندحة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -460,7 +580,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.265,
+    "px": 1075,
+    "py": 760,
+    "snap_acc": 36,
+    "outlet_acc": 36,
+    "catchment_cells": 36,
+    "catchment_cells_display": 36
    }
   },
   {
@@ -473,7 +599,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0627\u062f\u064a \u0627\u0644\u0642\u0631\u0627\u0631\u0647",
+    "name_en": "سد وادي القراره",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -482,7 +608,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 37.371,
+    "px": 1061,
+    "py": 797,
+    "snap_acc": 5070,
+    "outlet_acc": 5070,
+    "catchment_cells": 5070,
+    "catchment_cells_display": 5070
    }
   },
   {
@@ -495,7 +627,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u063a\u0631\u0627\u0628\u0629",
+    "name_en": "سد الغرابة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -504,7 +636,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 52.482,
+    "px": 380,
+    "py": 143,
+    "snap_acc": 7120,
+    "outlet_acc": 7120,
+    "catchment_cells": 7120,
+    "catchment_cells_display": 7120
    }
   },
   {
@@ -517,7 +655,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0639\u0645\u0642",
+    "name_en": "سد عمق",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -526,7 +664,13 @@
     "material": "concrete",
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 32.13,
+    "px": 363,
+    "py": 275,
+    "snap_acc": 4359,
+    "outlet_acc": 4359,
+    "catchment_cells": 4359,
+    "catchment_cells_display": 4359
    }
   },
   {
@@ -539,7 +683,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0627\u062f\u064a \u062e\u0636\u0627\u0631",
+    "name_en": "سد وادي خضار",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -548,7 +692,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.914,
+    "px": 1466,
+    "py": 965,
+    "snap_acc": 124,
+    "outlet_acc": 124,
+    "catchment_cells": 124,
+    "catchment_cells_display": 124
    }
   },
   {
@@ -561,7 +711,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0645\u0631\u0628\u0629",
+    "name_en": "سد مربة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -570,7 +720,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1400.164,
+    "px": 476,
+    "py": 1290,
+    "snap_acc": 189955,
+    "outlet_acc": 189955,
+    "catchment_cells": 189955,
+    "catchment_cells_display": 189955
    }
   },
   {
@@ -592,7 +748,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1.26,
+    "px": 470,
+    "py": 1287,
+    "snap_acc": 171,
+    "outlet_acc": 171,
+    "catchment_cells": 171,
+    "catchment_cells_display": 171
    }
   },
   {
@@ -605,7 +767,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0628\u062d\u064a\u0631\u0629 \u0633\u062f \u0645\u0631\u0628\u0629",
+    "name_en": "بحيرة سد مربة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -614,7 +776,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1.179,
+    "px": 469,
+    "py": 1287,
+    "snap_acc": 160,
+    "outlet_acc": 160,
+    "catchment_cells": 160,
+    "catchment_cells_display": 160
    }
   },
   {
@@ -627,7 +795,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u0639\u0627\u062f\u064a\u0629",
+    "name_en": "سد العادية",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -636,7 +804,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 19.769,
+    "px": 1560,
+    "py": 1210,
+    "snap_acc": 2682,
+    "outlet_acc": 2682,
+    "catchment_cells": 2682,
+    "catchment_cells_display": 2682
    }
   },
   {
@@ -649,7 +823,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u062e\u0636\u0627\u0631 \u0627\u0644\u062d\u064a\u0645\u0629",
+    "name_en": "سد خضار الحيمة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -658,7 +832,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 4.496,
+    "px": 653,
+    "py": 264,
+    "snap_acc": 610,
+    "outlet_acc": 610,
+    "catchment_cells": 610,
+    "catchment_cells_display": 610
    }
   },
   {
@@ -671,7 +851,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u062c\u0648\u0641 \u0627\u0644\u0647\u062c\u0644\u0629",
+    "name_en": "سد جوف الهجلة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -680,7 +860,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 36.686,
+    "px": 1235,
+    "py": 993,
+    "snap_acc": 4977,
+    "outlet_acc": 4977,
+    "catchment_cells": 4977,
+    "catchment_cells_display": 4977
    }
   },
   {
@@ -702,7 +888,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.575,
+    "px": 1511,
+    "py": 823,
+    "snap_acc": 78,
+    "outlet_acc": 78,
+    "catchment_cells": 78,
+    "catchment_cells_display": 78
    }
   },
   {
@@ -724,7 +916,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 3.295,
+    "px": 1309,
+    "py": 1117,
+    "snap_acc": 447,
+    "outlet_acc": 447,
+    "catchment_cells": 447,
+    "catchment_cells_display": 447
    }
   },
   {
@@ -737,7 +935,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u0639\u0633\u0631\u0627\u0646",
+    "name_en": "سد العسران",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -746,7 +944,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 3.324,
+    "px": 1308,
+    "py": 1117,
+    "snap_acc": 451,
+    "outlet_acc": 451,
+    "catchment_cells": 451,
+    "catchment_cells_display": 451
    }
   },
   {
@@ -759,7 +963,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0628\u062d\u064a\u0631\u0629 \u0633\u062f \u0627\u0644\u0639\u0645\u0644",
+    "name_en": "بحيرة سد العمل",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -768,7 +972,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 24.273,
+    "px": 1523,
+    "py": 1062,
+    "snap_acc": 3293,
+    "outlet_acc": 3293,
+    "catchment_cells": 3293,
+    "catchment_cells_display": 3293
    }
   },
   {
@@ -781,7 +991,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u0639\u0645\u0644",
+    "name_en": "سد العمل",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -790,7 +1000,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 24.339,
+    "px": 1525,
+    "py": 1061,
+    "snap_acc": 3302,
+    "outlet_acc": 3302,
+    "catchment_cells": 3302,
+    "catchment_cells_display": 3302
    }
   },
   {
@@ -803,7 +1019,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0628\u062d\u064a\u0631\u0629 \u0633\u062f \u0642\u0631\u0636\u0627\u0646",
+    "name_en": "بحيرة سد قرضان",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -812,7 +1028,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 28.113,
+    "px": 1367,
+    "py": 1164,
+    "snap_acc": 3814,
+    "outlet_acc": 3814,
+    "catchment_cells": 3814,
+    "catchment_cells_display": 3814
    }
   },
   {
@@ -834,7 +1056,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1.6,
+    "px": 1370,
+    "py": 1167,
+    "snap_acc": 217,
+    "outlet_acc": 217,
+    "catchment_cells": 217,
+    "catchment_cells_display": 217
    }
   },
   {
@@ -847,7 +1075,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0642\u0631\u0636\u0627\u0646",
+    "name_en": "سد قرضان",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -856,7 +1084,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 26.123,
+    "px": 1368,
+    "py": 1163,
+    "snap_acc": 3544,
+    "outlet_acc": 3544,
+    "catchment_cells": 3544,
+    "catchment_cells_display": 3544
    }
   },
   {
@@ -869,7 +1103,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0628\u062d\u064a\u0631\u0629 \u0633\u062f \u0648\u0627\u062f\u064a \u0639\u0634\u0631\u0627\u0646",
+    "name_en": "بحيرة سد وادي عشران",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -878,7 +1112,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 33.796,
+    "px": 541,
+    "py": 811,
+    "snap_acc": 4585,
+    "outlet_acc": 4585,
+    "catchment_cells": 4585,
+    "catchment_cells_display": 4585
    }
   },
   {
@@ -900,7 +1140,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 16.297,
+    "px": 936,
+    "py": 1128,
+    "snap_acc": 2211,
+    "outlet_acc": 2211,
+    "catchment_cells": 2211,
+    "catchment_cells_display": 2211
    }
   },
   {
@@ -913,7 +1159,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u062a\u0645\u0646\u064a\u0629",
+    "name_en": "سد تمنية",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -922,7 +1168,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 16.297,
+    "px": 936,
+    "py": 1128,
+    "snap_acc": 2211,
+    "outlet_acc": 2211,
+    "catchment_cells": 2211,
+    "catchment_cells_display": 2211
    }
   },
   {
@@ -935,7 +1187,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0631\u064a\u0645\u0647",
+    "name_en": "سد ريمه",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -944,7 +1196,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.619,
+    "px": 472,
+    "py": 698,
+    "snap_acc": 84,
+    "outlet_acc": 84,
+    "catchment_cells": 84,
+    "catchment_cells_display": 84
    }
   },
   {
@@ -966,7 +1224,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 40.659,
+    "px": 1009,
+    "py": 415,
+    "snap_acc": 5516,
+    "outlet_acc": 5516,
+    "catchment_cells": 5516,
+    "catchment_cells_display": 5516
    }
   },
   {
@@ -988,7 +1252,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.833,
+    "px": 1586,
+    "py": 1243,
+    "snap_acc": 927,
+    "outlet_acc": 927,
+    "catchment_cells": 927,
+    "catchment_cells_display": 927
    }
   },
   {
@@ -1010,7 +1280,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.833,
+    "px": 1586,
+    "py": 1243,
+    "snap_acc": 927,
+    "outlet_acc": 927,
+    "catchment_cells": 927,
+    "catchment_cells_display": 927
    }
   },
   {
@@ -1032,7 +1308,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 3.929,
+    "px": 1514,
+    "py": 1099,
+    "snap_acc": 533,
+    "outlet_acc": 533,
+    "catchment_cells": 533,
+    "catchment_cells_display": 533
    }
   },
   {
@@ -1045,7 +1327,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0633\u0627\u0646\u0628",
+    "name_en": "سد وسانب",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -1054,7 +1336,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.899,
+    "px": 302,
+    "py": 702,
+    "snap_acc": 122,
+    "outlet_acc": 122,
+    "catchment_cells": 122,
+    "catchment_cells_display": 122
    }
   },
   {
@@ -1067,7 +1355,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u062e\u0644\u0635\u0629",
+    "name_en": "سد الخلصة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -1076,7 +1364,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.472,
+    "px": 325,
+    "py": 169,
+    "snap_acc": 64,
+    "outlet_acc": 64,
+    "catchment_cells": 64,
+    "catchment_cells_display": 64
    }
   },
   {
@@ -1089,7 +1383,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0627\u0644\u0645\u0642\u0636\u0627",
+    "name_en": "سد المقضا",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -1098,7 +1392,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.693,
+    "px": 512,
+    "py": 851,
+    "snap_acc": 908,
+    "outlet_acc": 908,
+    "catchment_cells": 908,
+    "catchment_cells_display": 908
    }
   },
   {
@@ -1111,7 +1411,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u0648\u0627\u062f\u064a \u0627\u0644\u062d\u0631\u064a\u0642\u0629",
+    "name_en": "سد وادي الحريقة",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -1120,7 +1420,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 33.649,
+    "px": 1588,
+    "py": 797,
+    "snap_acc": 4565,
+    "outlet_acc": 4565,
+    "catchment_cells": 4565,
+    "catchment_cells_display": 4565
    }
   },
   {
@@ -1133,7 +1439,7 @@
     ]
    },
    "properties": {
-    "name_en": "\u0633\u062f \u062c\u0648\u0641 \u0622\u0644 \u0645\u0639\u0645\u0631",
+    "name_en": "سد جوف آل معمر",
     "name_ar": "",
     "capacity_m3": null,
     "capacity_mcm": null,
@@ -1142,7 +1448,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 33.192,
+    "px": 1438,
+    "py": 882,
+    "snap_acc": 4503,
+    "outlet_acc": 4503,
+    "catchment_cells": 4503,
+    "catchment_cells_display": 4503
    }
   }
  ]

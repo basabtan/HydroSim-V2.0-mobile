@@ -20,7 +20,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.893,
+    "px": 755,
+    "py": 855,
+    "snap_acc": 136,
+    "outlet_acc": 136,
+    "catchment_cells": 136,
+    "catchment_cells_display": 136
    }
   },
   {
@@ -42,7 +48,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.158,
+    "px": 1183,
+    "py": 1261,
+    "snap_acc": 24,
+    "outlet_acc": 24,
+    "catchment_cells": 24,
+    "catchment_cells_display": 24
    }
   },
   {
@@ -64,7 +76,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.53,
+    "px": 693,
+    "py": 418,
+    "snap_acc": 995,
+    "outlet_acc": 995,
+    "catchment_cells": 995,
+    "catchment_cells_display": 995
    }
   },
   {
@@ -86,7 +104,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.438,
+    "px": 691,
+    "py": 420,
+    "snap_acc": 981,
+    "outlet_acc": 981,
+    "catchment_cells": 981,
+    "catchment_cells_display": 981
    }
   },
   {
@@ -108,7 +132,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 6.379,
+    "px": 690,
+    "py": 421,
+    "snap_acc": 972,
+    "outlet_acc": 972,
+    "catchment_cells": 972,
+    "catchment_cells_display": 972
    }
   },
   {
@@ -130,7 +160,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.026,
+    "px": 486,
+    "py": 63,
+    "snap_acc": 4,
+    "outlet_acc": 4,
+    "catchment_cells": 4,
+    "catchment_cells_display": 4
    }
   },
   {
@@ -152,7 +188,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.217,
+    "px": 789,
+    "py": 733,
+    "snap_acc": 33,
+    "outlet_acc": 33,
+    "catchment_cells": 33,
+    "catchment_cells_display": 33
    }
   },
   {
@@ -174,7 +216,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.249,
+    "px": 1303,
+    "py": 1155,
+    "snap_acc": 38,
+    "outlet_acc": 38,
+    "catchment_cells": 38,
+    "catchment_cells_display": 38
    }
   },
   {
@@ -196,7 +244,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1.332,
+    "px": 1312,
+    "py": 1160,
+    "snap_acc": 203,
+    "outlet_acc": 203,
+    "catchment_cells": 203,
+    "catchment_cells_display": 203
    }
   },
   {
@@ -218,7 +272,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1.168,
+    "px": 1308,
+    "py": 1134,
+    "snap_acc": 178,
+    "outlet_acc": 178,
+    "catchment_cells": 178,
+    "catchment_cells_display": 178
    }
   },
   {
@@ -240,7 +300,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.479,
+    "px": 1327,
+    "py": 1133,
+    "snap_acc": 73,
+    "outlet_acc": 73,
+    "catchment_cells": 73,
+    "catchment_cells_display": 73
    }
   },
   {
@@ -262,7 +328,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.374,
+    "px": 1284,
+    "py": 1133,
+    "snap_acc": 57,
+    "outlet_acc": 57,
+    "catchment_cells": 57,
+    "catchment_cells_display": 57
    }
   },
   {
@@ -284,7 +356,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.368,
+    "px": 1285,
+    "py": 1133,
+    "snap_acc": 56,
+    "outlet_acc": 56,
+    "catchment_cells": 56,
+    "catchment_cells_display": 56
    }
   },
   {
@@ -306,7 +384,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.394,
+    "px": 1287,
+    "py": 1126,
+    "snap_acc": 60,
+    "outlet_acc": 60,
+    "catchment_cells": 60,
+    "catchment_cells_display": 60
    }
   },
   {
@@ -328,7 +412,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 17.24,
+    "px": 1320,
+    "py": 910,
+    "snap_acc": 2627,
+    "outlet_acc": 2627,
+    "catchment_cells": 2627,
+    "catchment_cells_display": 2627
    }
   },
   {
@@ -350,7 +440,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 13.211,
+    "px": 1353,
+    "py": 913,
+    "snap_acc": 2013,
+    "outlet_acc": 2013,
+    "catchment_cells": 2013,
+    "catchment_cells_display": 2013
    }
   },
   {
@@ -372,7 +468,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 1.398,
+    "px": 1261,
+    "py": 1133,
+    "snap_acc": 213,
+    "outlet_acc": 213,
+    "catchment_cells": 213,
+    "catchment_cells_display": 213
    }
   },
   {
@@ -394,7 +496,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 2.986,
+    "px": 1222,
+    "py": 1215,
+    "snap_acc": 455,
+    "outlet_acc": 455,
+    "catchment_cells": 455,
+    "catchment_cells_display": 455
    }
   },
   {
@@ -416,7 +524,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.053,
+    "px": 1374,
+    "py": 1452,
+    "snap_acc": 8,
+    "outlet_acc": 8,
+    "catchment_cells": 8,
+    "catchment_cells_display": 8
    }
   },
   {
@@ -438,7 +552,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.072,
+    "px": 1429,
+    "py": 824,
+    "snap_acc": 11,
+    "outlet_acc": 11,
+    "catchment_cells": 11,
+    "catchment_cells_display": 11
    }
   },
   {
@@ -460,7 +580,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.072,
+    "px": 1429,
+    "py": 824,
+    "snap_acc": 11,
+    "outlet_acc": 11,
+    "catchment_cells": 11,
+    "catchment_cells_display": 11
    }
   },
   {
@@ -482,7 +608,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.072,
+    "px": 1429,
+    "py": 824,
+    "snap_acc": 11,
+    "outlet_acc": 11,
+    "catchment_cells": 11,
+    "catchment_cells_display": 11
    }
   },
   {
@@ -504,7 +636,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.223,
+    "px": 1188,
+    "py": 1261,
+    "snap_acc": 34,
+    "outlet_acc": 34,
+    "catchment_cells": 34,
+    "catchment_cells_display": 34
    }
   },
   {
@@ -526,7 +664,13 @@
     "material": null,
     "verified": false,
     "source": "OpenStreetMap",
-    "catchment_area_km2": 0
+    "catchment_area_km2": 0.177,
+    "px": 1197,
+    "py": 1254,
+    "snap_acc": 27,
+    "outlet_acc": 27,
+    "catchment_cells": 27,
+    "catchment_cells_display": 27
    }
   }
  ]
