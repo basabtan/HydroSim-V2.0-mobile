@@ -1763,17 +1763,25 @@ function bindUI() {
     if (riVal) riVal.textContent = intensityBand(i);
   }
 
+  // In Advanced mode, live re-run the flood model on depth/duration change
+  // (only if results already exist, so we refresh rather than compute from scratch).
+  function liveRecomputeIfAdvanced() {
+    if (state.flood.advanced && state.flood.lastResult) runFloodModel();
+  }
+
   rainDepth.addEventListener('input', e => {
     state.flood.rainDepth = +e.target.value;
     rainDepthVal.textContent = `${state.flood.rainDepth} mm`;
     syncRainFromStorm();
     updateStormReadout();
+    liveRecomputeIfAdvanced();
   });
   rainDur.addEventListener('input', e => {
     state.flood.rainDur = +e.target.value;
     rainDurVal.textContent = `${state.flood.rainDur} h`;
     syncRainFromStorm();
     updateStormReadout();
+    liveRecomputeIfAdvanced();
   });
 
   // Advanced mode toggle: link visual intensity to i = P/T and show IDF readout.
@@ -1784,6 +1792,7 @@ function bindUI() {
     if (ri) ri.disabled = state.flood.advanced;  // derived, not manually set, in Advanced mode
     if (state.flood.advanced) syncRainFromStorm();
     updateStormReadout();
+    liveRecomputeIfAdvanced();  // entering Advanced mode refreshes existing results
   });
   infil.addEventListener('input', e => {
     state.flood.infil = +e.target.value;
