@@ -30,7 +30,11 @@ import json, os, sys
 import numpy as np
 from collections import deque, defaultdict
 
-REGIONS = ['makkah_jeddah_taif', 'eastern_province', 'riyadh', 'asir_abha']
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
+REGIONS = ['makkah_jeddah_taif', 'makkah', 'wadi_ibrahim',
+           'eastern_province', 'riyadh', 'asir_abha']
 BASE = os.path.join(os.path.dirname(__file__), 'data', 'regions')
 NB = [(-1,-1),(0,-1),(1,-1),(-1,0),(1,0),(-1,1),(0,1),(1,1)]
 
@@ -65,14 +69,122 @@ def delineate_count(outx, outy, dx, dy, W, H):
     return cnt
 
 
+def validate_grids(region, rdir, meta, W, H, rep):
+    """Validate alignment, grid/source resolution semantics and study outlets."""
+    n = W * H
+    specs = {
+        'elevation.bin': (np.int16, n), 'dtm.bin': (np.int16, n),
+        'flowdir.bin': (np.int8, n * 2), 'flowacc.bin': (np.uint32, n),
+        'slope.bin': (np.float32, n), 'twi.bin': (np.float32, n),
+    }
+    arrays = {}
+    for filename, (dtype, expected) in specs.items():
+        path = os.path.join(rdir, filename)
+        if not os.path.exists(path):
+            rep.f(f"FAIL GRID [{region}]: missing {filename}"); continue
+        arr = np.fromfile(path, dtype=dtype)
+        if arr.size != expected:
+            rep.f(f"FAIL GRID [{region}]: {filename} has {arr.size} values, expected {expected}")
+        else:
+            arrays[filename] = arr
+            rep.passed()
+    if len(arrays) != len(specs):
+        return None
+
+    elev = arrays['elevation.bin'].reshape(H, W)
+    dtm = arrays['dtm.bin'].reshape(H, W)
+    fd = arrays['flowdir.bin'].reshape(H, W, 2)
+    fa = arrays['flowacc.bin'].reshape(H, W)
+    slope = arrays['slope.bin'].reshape(H, W)
+    twi = arrays['twi.bin'].reshape(H, W)
+    valid = elev != -32768
+    new_region = region in ('makkah', 'wadi_ibrahim')
+    def alignment_issue(message):
+        (rep.f if new_region else rep.w)(message)
+    cell_w_m = meta['area_km']['width'] * 1000.0 / W
+    cell_h_m = meta['area_km']['height'] * 1000.0 / H
+    cell_area_km2 = cell_w_m * cell_h_m / 1e6
+
+    if not np.array_equal(valid, dtm != -32768):
+        alignment_issue(f"{'FAIL' if new_region else 'WARN'} ALIGN [{region}]: DEM and DTM nodata footprints differ")
+    else: rep.passed()
+    if not np.isfinite(slope[valid]).all() or np.nanmin(slope[valid]) < 0 or np.nanmax(slope[valid]) > 90.01:
+        alignment_issue(f"{'FAIL' if new_region else 'WARN'} ALIGN [{region}]: slope contains non-finite or out-of-range degrees")
+    else: rep.passed()
+    if not np.isfinite(twi[valid]).all() or np.nanmin(twi[valid]) < -1e-6 or np.nanmax(twi[valid]) > 1.000001:
+        alignment_issue(f"{'FAIL' if new_region else 'WARN'} ALIGN [{region}]: TWI is not finite and normalized to 0..1")
+    else: rep.passed()
+    if not np.isin(fd, [-1, 0, 1]).all():
+        rep.f(f"FAIL D8 [{region}]: flowdir contains values outside -1,0,1")
+    else: rep.passed()
+
+    source_res = meta.get('source_raster_resolution_m', meta.get('src_resolution_m'))
+    grid_res = meta.get('grid_resolution_m', meta.get('processed_grid_resolution_m'))
+    if region in ('makkah', 'wadi_ibrahim'):
+        if source_res != 30 or grid_res != 30:
+            rep.f(f"FAIL RES [{region}]: expected explicit 30 m source and processed grid metadata")
+        else: rep.passed()
+        expected_area = int(valid.sum()) * cell_area_km2
+        stored_area = meta.get('study_area_km2')
+        if stored_area is None or abs(stored_area - expected_area) > max(0.01, expected_area * 0.001):
+            rep.f(f"FAIL AREA [{region}]: study_area_km2={stored_area} but valid grid gives {expected_area:.3f}")
+        else: rep.passed()
+        outlet = meta.get('outlet') or {}
+        ox, oy = outlet.get('px'), outlet.get('py')
+        if ox is None or oy is None or not (0 <= ox < W and 0 <= oy < H):
+            rep.f(f"FAIL OUTLET [{region}]: missing or invalid outlet px/py")
+        else:
+            ox, oy = int(ox), int(oy)
+            dx = fd[:, :, 0].astype(np.int32); dy = fd[:, :, 1].astype(np.int32)
+            recount = delineate_count(ox, oy, dx, dy, W, H)
+            acc = int(fa[oy, ox])
+            if recount != acc or recount != int(valid.sum()):
+                rep.f(f"FAIL OUTLET [{region}]: reverse-D8={recount}, flowacc={acc}, valid={int(valid.sum())}")
+            else: rep.passed()
+            if outlet.get('flowacc_cells') != acc:
+                rep.f(f"FAIL OUTLET [{region}]: metadata flowacc does not match raster")
+            else: rep.passed()
+        validation = meta.get('validation_area_km2')
+        if validation and not (validation[0] <= stored_area <= validation[1]):
+            rep.w(f"WARN SCIENCE [{region}]: delineated {stored_area:.3f} km2 is outside published validation range {validation[0]}-{validation[1]} km2")
+
+        for filename in ('study_boundary.geojson', 'admin_boundary.geojson',
+                         'wadi_catchment.geojson', 'drainage.geojson', 'lineaments.geojson'):
+            if not os.path.exists(os.path.join(rdir, filename)):
+                rep.f(f"FAIL OVERLAY [{region}]: missing {filename}")
+            else: rep.passed()
+        lineaments = json.load(open(os.path.join(rdir, 'lineaments.geojson'), encoding='utf-8'))
+        allowed = {'mapped', 'remote_derived', 'inferred'}
+        required = {'id', 'source', 'source_scale', 'source_date', 'status',
+                    'feature_type', 'confidence', 'orientation_deg', 'length_m', 'notes'}
+        for i, feature in enumerate(lineaments.get('features', [])):
+            props = feature.get('properties') or {}
+            if props.get('status') not in allowed or not required.issubset(props):
+                rep.f(f"FAIL LINEAMENT [{region}#{i}]: invalid provenance or required properties")
+            else: rep.passed()
+        admin = json.load(open(os.path.join(rdir, 'admin_boundary.geojson'), encoding='utf-8'))
+        if 'reference' not in str(admin.get('properties', {}).get('role', '')).lower():
+            rep.f(f"FAIL BOUNDARY [{region}]: administrative boundary is not marked reference-only")
+        else: rep.passed()
+    elif source_res and abs(cell_w_m - float(source_res)) > 5:
+        # Existing downsampled regions must not claim their source resolution is
+        # also the simulation-cell resolution.
+        if not meta.get('resolution_note') and region == 'makkah_jeddah_taif':
+            rep.f(f"FAIL RES [{region}]: source and processed resolution are not distinguished")
+        else: rep.passed()
+    return fa, fd
+
+
 def validate_region(region, rep, deep=True):
     rdir = os.path.join(BASE, region)
-    meta = json.load(open(os.path.join(rdir, 'metadata.json')))
+    meta = json.load(open(os.path.join(rdir, 'metadata.json'), encoding='utf-8'))
     W, H = meta['width'], meta['height']
-    fa = np.fromfile(os.path.join(rdir, 'flowacc.bin'), dtype=np.uint32).reshape(H, W)
-    fd = np.fromfile(os.path.join(rdir, 'flowdir.bin'), dtype=np.int8).reshape(H, W, 2)
+    grid_data = validate_grids(region, rdir, meta, W, H, rep)
+    if grid_data is None:
+        return
+    fa, fd = grid_data
     dx = fd[:, :, 0].astype(np.int32); dy = fd[:, :, 1].astype(np.int32)
-    dams = json.load(open(os.path.join(rdir, 'dams.geojson')))['features']
+    dams = json.load(open(os.path.join(rdir, 'dams.geojson'), encoding='utf-8'))['features']
     cell_w_m = meta['area_km']['width'] * 1000.0 / W
     cell_h_m = meta['area_km']['height'] * 1000.0 / H
     cell_area_km2 = (cell_w_m * cell_h_m) / 1e6

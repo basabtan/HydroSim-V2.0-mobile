@@ -492,7 +492,9 @@ function updateHUD() {
   set('cineRegion', m.region || '—');
   set('cineElevRange', `${m.elevation.min}–${m.elevation.max} m`);
   set('cineCoverage', m.area_km ? `${m.area_km.width} × ${m.area_km.height} km` : '—');
-  set('cineRes', m.src_resolution_m ? `${m.src_resolution_m} m` : '—');
+  const gridRes = m.grid_resolution_m || m.processed_grid_resolution_m ||
+    (m.area_km && s.W ? (m.area_km.width * 1000 / s.W) : null);
+  set('cineRes', gridRes ? `${gridRes.toFixed(gridRes < 100 ? 0 : 1)} m grid` : '—');
   if (m.flowacc) set('cineFlowMax', `${(m.flowacc.max / 1e6).toFixed(2)}M cells`);
 }
 

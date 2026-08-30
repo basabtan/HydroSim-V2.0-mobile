@@ -1,0 +1,77 @@
+{
+  "width": 1387,
+  "height": 723,
+  "src_width": 1387,
+  "src_height": 723,
+  "source_raster_resolution_m": 30,
+  "processed_grid_resolution_m": 30,
+  "src_resolution_m": 30,
+  "grid_resolution_m": 30,
+  "crs": "EPSG:32637 (UTM 37N)",
+  "utm_epsg": 32637,
+  "data_source": "Supabase flood-rasters/sinkfilled_dem.tif (authoritative Kingdom-scale sink-filled DEM)",
+  "bounds": {
+    "lon_min": 39.538800860008735,
+    "lon_max": 39.94130429551269,
+    "lat_min": 21.337577516462545,
+    "lat_max": 21.535307314860447
+  },
+  "elevation": {
+    "min": 109,
+    "max": 953,
+    "mean": 275.7,
+    "nodata": -32768
+  },
+  "area_km": {
+    "width": 41.61,
+    "height": 21.69
+  },
+  "study_area_km2": 370.832,
+  "study_boundary_method": "Reverse-D8 traversal from locally snapped outlet; administrative boundary is reference only",
+  "outlet": {
+    "candidate_lon": 39.539856,
+    "candidate_lat": 21.429734,
+    "snapped_lon": 39.5398556,
+    "snapped_lat": 21.4297342,
+    "px": 2,
+    "py": 389,
+    "flowacc_cells": 412036,
+    "reason": "Last Wadi Ibrahim receiving-channel cell before the major Wadi Uranah confluence (accumulation jumps from about 371 to 912 km2)"
+  },
+  "flowacc": {
+    "max": 412036,
+    "dtype": "uint32",
+    "counts_grid_cells_at_resolution_m": 30,
+    "channel_threshold_cells": 278,
+    "major_channel_threshold_cells": 5556
+  },
+  "twi": {
+    "dtype": "float32",
+    "range": "0..1 percentile-rank flood susceptibility",
+    "source": "Supabase flood-rasters/twi.tif"
+  },
+  "slope": {
+    "dtype": "float32",
+    "units": "degrees",
+    "source": "Supabase flood-rasters/slope.tif"
+  },
+  "dtm": {
+    "dtype": "int16",
+    "units": "meters",
+    "nodata": -32768,
+    "min": 108,
+    "max": 953,
+    "mean": 275.6,
+    "source": "Supabase flood-rasters/dtm.tif"
+  },
+  "region": "Makkah contributing hydrologic unit",
+  "region_key": "makkah",
+  "has_catchments": false,
+  "validation_area_km2": null,
+  "lineaments": {
+    "mapped": 0,
+    "remote_derived": 0,
+    "inferred": 0,
+    "note": "No un-georeferenced map lines were published as faults."
+  }
+}
