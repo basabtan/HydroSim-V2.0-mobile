@@ -531,7 +531,7 @@ button { user-select: none; }
   justify-content: center;
   z-index: 2;
 }
-#mapCanvas, #overlayCanvas, #floodCanvas, #waterCanvas {
+#mapCanvas, #contextCanvas, #overlayCanvas, #floodCanvas, #waterCanvas {
   position: absolute;
   max-width: 100%;
   max-height: 100%;
@@ -541,7 +541,7 @@ button { user-select: none; }
 #mapCanvas {
   filter: saturate(1.10) contrast(1.05);
 }
-#overlayCanvas, #floodCanvas, #waterCanvas { pointer-events: none; }
+#contextCanvas, #overlayCanvas, #floodCanvas, #waterCanvas { pointer-events: none; }
 #floodCanvas { mix-blend-mode: screen; }
 #threeWrap {
   position: absolute;
@@ -820,7 +820,7 @@ button { user-select: none; }
 #viewport,
 #viewport::after,
 .readout,
-#mapCanvas, #overlayCanvas, #floodCanvas, #waterCanvas,
+  #mapCanvas, #contextCanvas, #overlayCanvas, #floodCanvas, #waterCanvas,
 #threeWrap,
 .map-glow-card,
 .water-banner,
@@ -1026,12 +1026,45 @@ button { user-select: none; }
 }
 .scope-panel .region { margin-top: 12px; }
 #overviewHint { display: none; }
+.context-group {
+  margin: 12px 0 4px;
+  color: var(--text-dim);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+.context-row { padding: 7px 0; min-height: 34px; }
+.context-count {
+  display: inline-flex;
+  min-width: 22px;
+  justify-content: center;
+  margin-left: 5px;
+  padding: 1px 5px;
+  border: 1px solid rgba(148,163,184,.25);
+  color: var(--text-dim);
+  font-size: 9px;
+}
+.context-row.mapped > span::before,
+.context-row.remote > span::before,
+.context-row.inferred > span::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  margin-right: 7px;
+  border-top: 2px solid #fb7185;
+  vertical-align: middle;
+}
+.context-row.remote > span::before { border-color: #e879f9; border-top-style: dashed; }
+.context-row.inferred > span::before { border-color: #a78bfa; border-top-style: dotted; }
+.context-note { margin-top: 10px; line-height: 1.45; }
 .layer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .layer-btn { min-height: 54px; padding: 8px 6px; }
 .layer-btn.wide { grid-column: 1 / -1; min-height: 48px; }
 .layer-btn[style*="display: none"] { display: none !important; }
 #mapCanvas.overview-cursor { cursor: pointer; }
 #mapCanvas,
+#contextCanvas,
 #overlayCanvas,
 #floodCanvas,
 #waterCanvas,
@@ -1042,6 +1075,7 @@ button { user-select: none; }
   border-radius: 0 !important;
   box-shadow: 0 0 34px rgba(0,0,0,.24);
 }
+#contextCanvas,
 #overlayCanvas,
 #floodCanvas,
 #waterCanvas,
@@ -1548,7 +1582,7 @@ button { user-select: none; }
 
 /* Map owns touch gestures; on mobile scroll lives inside active panel slots. */
 #canvasWrap,
-#mapCanvas, #overlayCanvas, #floodCanvas, #waterCanvas, #damsCanvas {
+#mapCanvas, #contextCanvas, #overlayCanvas, #floodCanvas, #waterCanvas, #damsCanvas {
   touch-action: none;
 }
 

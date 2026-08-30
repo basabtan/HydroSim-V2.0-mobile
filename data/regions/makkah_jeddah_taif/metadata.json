@@ -4,6 +4,10 @@
  "src_width": 5815,
  "src_height": 4214,
  "src_resolution_m": 30,
+ "source_raster_resolution_m": 30,
+ "processed_grid_resolution_m_x": 109.0,
+ "processed_grid_resolution_m_y": 109.722,
+ "resolution_note": "The source raster is approximately 30 m; the 1600 x 1152 browser simulation grid is approximately 109-110 m.",
  "crs": "EPSG:32637 (UTM 37N)",
  "data_source": "User sink-filled DEM (Kingdom-wide, ~30m, EPSG:4326) clipped to AOI; hydrology recomputed with pysheds",
  "bounds": {

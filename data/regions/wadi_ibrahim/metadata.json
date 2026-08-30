@@ -1,0 +1,80 @@
+{
+  "width": 515,
+  "height": 440,
+  "src_width": 515,
+  "src_height": 440,
+  "source_raster_resolution_m": 30,
+  "processed_grid_resolution_m": 30,
+  "src_resolution_m": 30,
+  "grid_resolution_m": 30,
+  "crs": "EPSG:32637 (UTM 37N)",
+  "utm_epsg": 32637,
+  "data_source": "Supabase flood-rasters/sinkfilled_dem.tif (authoritative Kingdom-scale sink-filled DEM)",
+  "bounds": {
+    "lon_min": 39.79148040985581,
+    "lon_max": 39.94130429551269,
+    "lat_min": 21.414276382031055,
+    "lat_max": 21.534299128108124
+  },
+  "elevation": {
+    "min": 261,
+    "max": 953,
+    "mean": 400.0,
+    "nodata": -32768
+  },
+  "area_km": {
+    "width": 15.45,
+    "height": 13.2
+  },
+  "study_area_km2": 118.439,
+  "study_boundary_method": "Reverse-D8 traversal from locally snapped outlet; administrative boundary is reference only",
+  "outlet": {
+    "candidate_lon": 39.795465,
+    "candidate_lat": 21.438581,
+    "snapped_lon": 39.7940645,
+    "snapped_lat": 21.4379371,
+    "px": 8,
+    "py": 355,
+    "flowacc_cells": 131599,
+    "reason": "Western urban outlet before Wadi Ibrahim joins downstream tributaries"
+  },
+  "flowacc": {
+    "max": 131599,
+    "dtype": "uint32",
+    "counts_grid_cells_at_resolution_m": 30,
+    "channel_threshold_cells": 278,
+    "major_channel_threshold_cells": 5556
+  },
+  "twi": {
+    "dtype": "float32",
+    "range": "0..1 percentile-rank flood susceptibility",
+    "source": "Supabase flood-rasters/twi.tif"
+  },
+  "slope": {
+    "dtype": "float32",
+    "units": "degrees",
+    "source": "Supabase flood-rasters/slope.tif"
+  },
+  "dtm": {
+    "dtype": "int16",
+    "units": "meters",
+    "nodata": -32768,
+    "min": 259,
+    "max": 953,
+    "mean": 399.8,
+    "source": "Supabase flood-rasters/dtm.tif"
+  },
+  "region": "Wadi Ibrahim watershed",
+  "region_key": "wadi_ibrahim",
+  "has_catchments": false,
+  "validation_area_km2": [
+    111,
+    115
+  ],
+  "lineaments": {
+    "mapped": 0,
+    "remote_derived": 0,
+    "inferred": 0,
+    "note": "No un-georeferenced map lines were published as faults."
+  }
+}

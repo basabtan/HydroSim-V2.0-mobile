@@ -3,17 +3,21 @@ import { OrbitControls } from 'https://esm.sh/three@0.160.0/examples/jsm/control
 
 // ---------------- Region / scope configuration ----------------
 // Each scope loads its own .bin grid set on demand. The Kingdom overview is a
-// coarse downsampled national view used for navigation; the four regions are
-// full-resolution (~30 m source) flood-analysis windows.
+// coarse downsampled national view used for navigation; the six regions are
+// analysis windows derived from approximately 30 m source terrain. Processed
+// browser-grid resolution is recorded independently in each region's metadata.
 const REGIONS = {
   kingdom:            { name: 'Kingdom of Saudi Arabia', short: 'Kingdom', path: './data/kingdom', overview: true },
   makkah_jeddah_taif: { name: 'Makkah – Jeddah – Taif', short: 'Makkah–Jeddah–Taif', path: './data/regions/makkah_jeddah_taif' },
+  makkah:             { name: 'Makkah',                  short: 'Makkah', path: './data/regions/makkah' },
+  wadi_ibrahim:       { name: 'Wadi Ibrahim Watershed',  short: 'Wadi Ibrahim', path: './data/regions/wadi_ibrahim' },
   riyadh:             { name: 'Riyadh Region',           short: 'Riyadh', path: './data/regions/riyadh' },
   eastern_province:   { name: 'Eastern Province (Dammam – Khobar)', short: 'Eastern Province', path: './data/regions/eastern_province' },
   asir_abha:          { name: 'Asir / Abha Highlands',   short: 'Asir / Abha', path: './data/regions/asir_abha' },
 };
 let DATA = './data/regions/makkah_jeddah_taif';  // active region data path (mutable)
 const state = {
+  loadGeneration: 0,
   region: 'makkah_jeddah_taif',  // active scope key
   isOverview: false,
   meta: null,
@@ -46,6 +50,18 @@ const state = {
     labels: null,      // Uint16Array (W*H): 0=no dam controls this cell, else damIndex+1
     show: true,
     lastRun: null,     // [{idx, inflowM3, fillPct, overflowM3, overflows, hoursToFull}]
+  },
+  context: {
+    study: null,
+    admin: null,
+    wadi: null,
+    drainage: null,
+    lineaments: null,
+    show: {
+      study: true, admin: false, wadi: true,
+      drainage: false, major: true,
+      mapped: true, remote_derived: false, inferred: false,
+    },
   },
   cursorInd: null,     // orbit-ring cursor coordinate indicator instance
 };
@@ -165,6 +181,13 @@ function resetCaches() {
   state.images = {};
   state.flood.lastResult = null;
   state.dams.lastRun = null;
+  state.context.study = state.context.admin = state.context.wadi = null;
+  state.context.drainage = state.context.lineaments = null;
+  state.context.show = {
+    study: true, admin: false, wadi: true,
+    drainage: false, major: true,
+    mapped: true, remote_derived: false, inferred: false,
+  };
   if (state.three) {
     cancelAnimationFrame(state.three.raf);
     try { state.three.renderer.dispose(); state.three.wrap.innerHTML = ''; } catch (e) {}
@@ -172,12 +195,29 @@ function resetCaches() {
     const t3 = document.getElementById('threeToggle');
     if (t3) t3.checked = false;
     document.getElementById('threeWrap').classList.add('hidden');
-    for (const c of [mapCanvas, overlay, floodCv, waterCv, damsCv]) c.classList.remove('hidden');
+    for (const c of [mapCanvas, contextCv, overlay, floodCv, waterCv, damsCv]) c.classList.remove('hidden');
   }
   if (state.rain.active) toggleRain(false);
   state.profile.p0 = state.profile.p1 = null;
   const pp = document.getElementById('profilePanel');
   if (pp) pp.classList.add('hidden');
+  for (const [cv, ctx] of [[overlay, octx], [floodCv, fctx], [waterCv, wctx],
+                            [damsCv, dctx], [contextCv, cctx]]) {
+    if (cv && ctx) ctx.clearRect(0, 0, cv.width, cv.height);
+  }
+  const floodStat = document.getElementById('floodStat');
+  if (floodStat) floodStat.textContent = 'Set rainfall, then run the model to predict flooded wadis and depths.';
+  document.getElementById('damsSummary')?.remove();
+}
+
+function clearRegionData() {
+  state.meta = null;
+  state.elev = state.flow = state.flowacc = null;
+  state.twi = state.slopeDeg = state.dtm = null;
+  state.W = state.H = 0;
+  state.flood.validCount = 0;
+  state.dams.list = [];
+  state.dams.labels = null;
 }
 
 async function fetchBin(url, Ctor) {
@@ -186,43 +226,71 @@ async function fetchBin(url, Ctor) {
   return new Ctor(await r.arrayBuffer());
 }
 
+async function fetchBinOptional(url, Ctor) {
+  try { return await fetchBin(url, Ctor); }
+  catch (e) { console.warn(`Optional grid unavailable: ${url}`); return null; }
+}
+
+async function fetchJsonOptional(url) {
+  try {
+    const r = await fetch(url);
+    if (!r.ok) return null;
+    return await r.json();
+  } catch (e) { return null; }
+}
+
 // Load a scope (region or Kingdom overview) on demand and render it.
 async function loadRegion(key) {
   const cfg = REGIONS[key];
   if (!cfg) return;
+  const loadId = ++state.loadGeneration;
+  const dataPath = cfg.path;
   const loadEl = document.getElementById('loading');
   if (loadEl) {
     const p = loadEl.querySelector('p'); if (p) p.textContent = `Loading ${cfg.short}…`;
     loadEl.classList.remove('hidden');
   }
-  DATA = cfg.path;
-  state.region = key;
-  state.isOverview = !!cfg.overview;
   resetCaches();
+  clearRegionData();
 
-  const meta = await fetch(`${DATA}/metadata.json`).then(r => r.json());
-  state.meta = meta;
-  state.W = meta.width;
-  state.H = meta.height;
-  if (state.cursorInd && meta.elevation) state.cursorInd.setRange(meta.elevation.min, meta.elevation.max);
+  try {
+    const metaRes = await fetch(`${dataPath}/metadata.json`);
+    if (!metaRes.ok) throw new Error(`${dataPath}/metadata.json -> ${metaRes.status}`);
+    const meta = await metaRes.json();
+    const W = meta.width, H = meta.height;
+    const isOverview = !!cfg.overview;
+    const elevationP = fetchBin(`${dataPath}/elevation.bin`, Int16Array);
+    const twiP = fetchBinOptional(`${dataPath}/twi.bin`, Float32Array);
+    const flowP = isOverview ? Promise.resolve(null) : fetchBin(`${dataPath}/flowdir.bin`, Int8Array);
+    const flowaccP = isOverview ? Promise.resolve(null) : fetchBinOptional(`${dataPath}/flowacc.bin`, Uint32Array);
+    const slopeP = isOverview ? Promise.resolve(null) : fetchBinOptional(`${dataPath}/slope.bin`, Float32Array);
+    const dtmP = isOverview ? Promise.resolve(null) : fetchBinOptional(`${dataPath}/dtm.bin`, Int16Array);
+    const damsP = isOverview ? Promise.resolve({ list: [], labels: null })
+      : loadDamsData(dataPath, meta, W, H);
+    const contextP = isOverview ? Promise.resolve({}) : loadContextData(dataPath);
+    const [elev, twi, flow, flowacc, slopeDeg, dtm, dams, context] = await Promise.all([
+      elevationP, twiP, flowP, flowaccP, slopeP, dtmP, damsP, contextP,
+    ]);
+    if (loadId !== state.loadGeneration) return;
 
-  state.elev = await fetchBin(`${DATA}/elevation.bin`, Int16Array);
-
-  if (state.isOverview) {
-    state.flow = null; state.flowacc = null; state.slopeDeg = null; state.dtm = null;
-    try { state.twi = await fetchBin(`${DATA}/twi.bin`, Float32Array); } catch (e) { state.twi = null; }
-    state.dams.list = []; state.dams.labels = null;
-  } else {
-    state.flow = await fetchBin(`${DATA}/flowdir.bin`, Int8Array);
-    try { state.flowacc = await fetchBin(`${DATA}/flowacc.bin`, Uint32Array); }
-    catch (e) { console.warn('flowacc.bin missing'); state.flowacc = null; }
-    try { state.twi = await fetchBin(`${DATA}/twi.bin`, Float32Array); }
-    catch (e) { state.twi = null; }
-    try { state.slopeDeg = await fetchBin(`${DATA}/slope.bin`, Float32Array); }
-    catch (e) { state.slopeDeg = null; }
-    try { state.dtm = await fetchBin(`${DATA}/dtm.bin`, Int16Array); }
-    catch (e) { console.warn('dtm.bin missing'); state.dtm = null; }
-    await loadDams();
+    DATA = dataPath;
+    state.region = key;
+    state.isOverview = isOverview;
+    state.meta = meta;
+    state.W = W; state.H = H;
+    state.elev = elev; state.twi = twi; state.flow = flow; state.flowacc = flowacc;
+    state.slopeDeg = slopeDeg; state.dtm = dtm;
+    state.dams.list = dams.list; state.dams.labels = dams.labels;
+    Object.assign(state.context, context);
+    if (state.cursorInd && meta.elevation) state.cursorInd.setRange(meta.elevation.min, meta.elevation.max);
+  } catch (e) {
+    if (loadId !== state.loadGeneration) return;
+    console.error(e);
+    if (loadEl) {
+      const p = loadEl.querySelector('p');
+      if (p) p.textContent = `Could not load ${cfg.short}: ${e.message}`;
+    }
+    return;
   }
 
   let vc = 0;
@@ -234,6 +302,8 @@ async function loadRegion(key) {
   if (state.isOverview && !['color', 'twi'].includes(state.layer)) state.layer = 'color';
   setLayer(state.layer || 'color');
   if (!state.isOverview) { renderDamsPanel(); drawDamMarkers(); }
+  renderContextPanel();
+  drawContextOverlays();
   const loadEl2 = document.getElementById('loading');
   if (loadEl2) loadEl2.classList.add('hidden');
 }
@@ -265,6 +335,12 @@ function fillMeta() {
   const b = m.bounds;
   const proj = (m.crs || '').includes('4326') ? 'Geographic (WGS84)'
              : (m.crs ? m.crs.replace(/^EPSG:\d+\s*/, '').replace(/[()]/g, '').trim() : 'UTM');
+  const sourceRes = m.source_raster_resolution_m || m.src_resolution_m;
+  const gridX = m.grid_resolution_m || m.processed_grid_resolution_m || (m.area_km?.width * 1000 / state.W);
+  const gridY = m.grid_resolution_m || m.processed_grid_resolution_m || (m.area_km?.height * 1000 / state.H);
+  const gridRes = Math.abs(gridX - gridY) < 0.2
+    ? `${gridX.toFixed(gridX < 100 ? 0 : 1)} m`
+    : `${gridX.toFixed(1)} × ${gridY.toFixed(1)} m`;
   const rows = state.isOverview ? [
     ['Scope', 'National overview'],
     ['Resolution', `${m.src_resolution_m}`],
@@ -274,8 +350,8 @@ function fillMeta() {
     ['Lat', `${b.lat_min.toFixed(1)}–${b.lat_max.toFixed(1)}°N`],
     ['Lon', `${b.lon_min.toFixed(1)}–${b.lon_max.toFixed(1)}°E`],
   ] : [
-    ['Resolution', `${m.src_resolution_m} m`],
-    ['Grid', `${(m.src_width||state.W).toLocaleString()} × ${(m.src_height||state.H).toLocaleString()}`],
+    ['Source raster', `${sourceRes} m`],
+    ['Simulation grid', `${gridRes} · ${state.W.toLocaleString()} × ${state.H.toLocaleString()}`],
     ['Coverage', `${m.area_km.width} × ${m.area_km.height} km`],
     ['Elev. range', `${m.elevation.min}–${m.elevation.max} m`],
     ['Mean elev.', `${m.elevation.mean} m`],
@@ -288,34 +364,44 @@ function fillMeta() {
 }
 
 // ---------------- Phase 2: Dams data ----------------
-async function loadDams() {
+async function loadDamsData(dataPath, meta, W, H) {
+  let list = [];
   try {
-    const fc = await fetch(`${DATA}/dams.geojson`).then(r => r.json());
-    const b = state.meta.bounds;
-    state.dams.list = (fc.features || []).map(f => {
+    const fc = await fetch(`${dataPath}/dams.geojson`).then(r => r.json());
+    const b = meta.bounds;
+    list = (fc.features || []).map(f => {
       const lon = f.geometry.coordinates[0], lat = f.geometry.coordinates[1];
       const p = f.properties || {};
       // derive grid px/py from lon/lat when not pre-baked (new regions)
-      const px = (p.px != null) ? p.px : (lon - b.lon_min) / (b.lon_max - b.lon_min) * state.W;
-      const py = (p.py != null) ? p.py : (b.lat_max - lat) / (b.lat_max - b.lat_min) * state.H;
+      const px = (p.px != null) ? p.px : (lon - b.lon_min) / (b.lon_max - b.lon_min) * W;
+      const py = (p.py != null) ? p.py : (b.lat_max - lat) / (b.lat_max - b.lat_min) * H;
       return { ...p, lon, lat, px, py };
     });
-  } catch (e) {
-    state.dams.list = [];
-  }
+  } catch (e) { list = []; }
+  let labels = null;
   // Catchment routing grid only exists for regions where it was precomputed
   // (flagged in metadata). Other regions render dams as informational markers.
-  if (state.meta && state.meta.has_catchments) {
+  if (meta && meta.has_catchments) {
     try {
-      const buf = await fetch(`${DATA}/dam_catchments.bin`).then(r => r.arrayBuffer());
-      state.dams.labels = new Uint16Array(buf);
+      const buf = await fetch(`${dataPath}/dam_catchments.bin`).then(r => r.arrayBuffer());
+      labels = new Uint16Array(buf);
     } catch (e) {
       console.warn('dam_catchments.bin not available — reservoir routing disabled');
-      state.dams.labels = null;
+      labels = null;
     }
-  } else {
-    state.dams.labels = null;
   }
+  return { list, labels };
+}
+
+async function loadContextData(dataPath) {
+  const [study, admin, wadi, drainage, lineaments] = await Promise.all([
+    fetchJsonOptional(`${dataPath}/study_boundary.geojson`),
+    fetchJsonOptional(`${dataPath}/admin_boundary.geojson`),
+    fetchJsonOptional(`${dataPath}/wadi_catchment.geojson`),
+    fetchJsonOptional(`${dataPath}/drainage.geojson`),
+    fetchJsonOptional(`${dataPath}/lineaments.geojson`),
+  ]);
+  return { study, admin, wadi, drainage, lineaments };
 }
 
 // Procedural basemaps (color/hillshade/slope/aspect) are defined in basemaps.js
@@ -332,6 +418,8 @@ const waterCv = document.getElementById('waterCanvas');
 const wctx = waterCv.getContext('2d');
 const damsCv = document.getElementById('damsCanvas');
 const dctx = damsCv.getContext('2d');
+const contextCv = document.getElementById('contextCanvas');
+const cctx = contextCv.getContext('2d');
 
 // ---------------- Procedural basemaps (region-agnostic) ----------------
 // Colour relief, hillshade, slope and aspect are baked from the elevation grid
@@ -466,12 +554,13 @@ function drawProcedural(layer) {
 
 
 function fitCanvas() {
+  if (!state.W || !state.H) return;
   const wrap = document.getElementById('canvasWrap');
   const aspect = state.W / state.H;
   const pad = (window.innerWidth <= 860) ? 12 : 32;   // reclaim space on mobile
   let cw = wrap.clientWidth - pad, ch = wrap.clientHeight - pad;
   if (cw / ch > aspect) cw = ch * aspect; else ch = cw / aspect;
-  for (const c of [mapCanvas, overlay, floodCv, waterCv, damsCv]) {
+  for (const c of [mapCanvas, contextCv, overlay, floodCv, waterCv, damsCv]) {
     c.style.width = cw + 'px';
     c.style.height = ch + 'px';
     c.width = state.W;
@@ -480,6 +569,7 @@ function fitCanvas() {
   // Re-render flood overlay if a result exists
   if (state.flood.lastResult) runFloodModel();
   drawDamMarkers();
+  drawContextOverlays();
 }
 
 function setLayer(layer) {
@@ -909,6 +999,7 @@ function init3D() {
 function toggle3D(on) {
   document.getElementById('threeWrap').classList.toggle('hidden', !on);
   mapCanvas.classList.toggle('hidden', on);
+  contextCv.classList.toggle('hidden', on);
   overlay.classList.toggle('hidden', on);
   floodCv.classList.toggle('hidden', on);
   waterCv.classList.toggle('hidden', on);
@@ -1125,7 +1216,10 @@ function computeSlopeFromFlow(i) {
   const v = state.elev[i];
   const nv = state.elev[ny * W + nx];
   if (v === -32768 || nv === -32768) return 0;
-  const dist = (dx !== 0 && dy !== 0) ? 42.43 : 30; // cell ~30m, diag = 30*sqrt(2)
+  const m = state.meta;
+  const cellX = m.grid_resolution_m || m.processed_grid_resolution_m || (m.area_km.width * 1000 / state.W);
+  const cellY = m.grid_resolution_m || m.processed_grid_resolution_m || (m.area_km.height * 1000 / state.H);
+  const dist = Math.hypot(dx * cellX, dy * cellY);
   return Math.max(0, (v - nv) / dist); // rise/run
 }
 
@@ -1180,16 +1274,13 @@ function runFloodModel() {
   const containing = reservoir.containing;
   const useDamRouting = labels && state.dams.list.length > 0;
 
-  // Source DEM resolution (m) - need to use the source 30m not the display pixel
-  // because flowacc was computed at source resolution.  Each display pixel
-  // corresponds to multiple source cells; we approximate with display pixel area.
+  // Flow accumulation counts cells on the processed simulation grid, not cells
+  // in the higher-resolution source raster. Preserve that distinction here.
   const m = state.meta;
-  const pixelM = (m.area_km.width * 1000) / state.W;  // ~110m at display res
-  const pixelArea = pixelM * pixelM;                  // m² per display pixel
-
-  // Each flowacc value counts cells at SOURCE resolution (30m).
-  // So contributing area for a display pixel ≈ acc * 30 * 30 m²
-  const srcCellArea = m.src_resolution_m * m.src_resolution_m;  // 900 m²
+  const pixelW = m.grid_resolution_m || m.processed_grid_resolution_m || (m.area_km.width * 1000 / state.W);
+  const pixelH = m.grid_resolution_m || m.processed_grid_resolution_m || (m.area_km.height * 1000 / state.H);
+  const pixelArea = pixelW * pixelH;
+  const pixelM = Math.sqrt(pixelArea);
 
   const img = fctx.createImageData(state.W, state.H);
   const data = img.data;
@@ -1200,9 +1291,9 @@ function runFloodModel() {
   let peakQ = 0;
 
   // Channel threshold: only cells with substantial upstream area are stream channels.
-  // 50 source cells = 50 * 900 m² = 4.5 hectares of upstream drainage = minimum wadi.
+  // 4.5 hectares of upstream drainage = minimum wadi, expressed in active-grid cells.
   // Below this, water is sheet flow / hillslope runoff (not "flooding").
-  const CHANNEL_THRESHOLD = 50;
+  const CHANNEL_THRESHOLD = Math.max(1, Math.ceil(45000 / pixelArea));
 
   // Phase 3 — TWI-based flood susceptibility.
   // state.twi is a 0..1 percentile-rank wetness/susceptibility index derived from
@@ -1244,7 +1335,7 @@ function runFloodModel() {
     const C = Math.min(0.95, baseRunoff + 0.25 * slopeBoost);
 
     // Upstream contributing area in m²
-    const Aup = (acc + 1) * srcCellArea;
+    const Aup = acc * pixelArea;
 
     // Total runoff volume that passes through this channel cell (m³)
     const V = (Pe / 1000) * Aup * C;
@@ -1493,6 +1584,105 @@ function lonLatToPx(lon, lat) {
   return { px, py };
 }
 
+// ---------------- Hydrology + geology reference overlays ----------------
+function contextFeatures(key) {
+  return (state.context[key] && state.context[key].features) || [];
+}
+
+function traceContextGeometry(geom) {
+  if (!geom) return;
+  const line = coords => {
+    coords.forEach(([lon, lat], i) => {
+      const p = lonLatToPx(lon, lat);
+      if (i) cctx.lineTo(p.px, p.py); else cctx.moveTo(p.px, p.py);
+    });
+  };
+  if (geom.type === 'LineString') line(geom.coordinates);
+  else if (geom.type === 'MultiLineString') geom.coordinates.forEach(line);
+  else if (geom.type === 'Polygon') geom.coordinates.forEach(r => { line(r); cctx.closePath(); });
+  else if (geom.type === 'MultiPolygon') geom.coordinates.forEach(p => p.forEach(r => { line(r); cctx.closePath(); }));
+}
+
+function drawContextCollection(fc, style, filter = null) {
+  if (!fc || !fc.features) return;
+  cctx.save();
+  cctx.strokeStyle = style.stroke;
+  cctx.fillStyle = style.fill || 'transparent';
+  cctx.lineWidth = style.width || 2;
+  cctx.setLineDash(style.dash || []);
+  cctx.lineJoin = 'round';
+  cctx.lineCap = 'round';
+  for (const feature of fc.features) {
+    if (filter && !filter(feature)) continue;
+    cctx.beginPath();
+    traceContextGeometry(feature.geometry);
+    if (style.fill && /Polygon/.test(feature.geometry?.type || '')) cctx.fill('evenodd');
+    cctx.stroke();
+  }
+  cctx.restore();
+}
+
+function drawContextOverlays() {
+  if (!contextCv || !state.W || !state.H) return;
+  cctx.clearRect(0, 0, state.W, state.H);
+  if (state.isOverview) return;
+  const show = state.context.show;
+  if (show.admin) drawContextCollection(state.context.admin,
+    { stroke: 'rgba(245,158,11,.82)', fill: 'rgba(245,158,11,.025)', width: 2, dash: [10, 7] });
+  if (show.study) drawContextCollection(state.context.study,
+    { stroke: 'rgba(45,212,191,.96)', fill: 'rgba(45,212,191,.035)', width: 3, dash: [12, 6] });
+  if (show.wadi) drawContextCollection(state.context.wadi,
+    { stroke: 'rgba(56,189,248,.96)', fill: 'rgba(56,189,248,.055)', width: 3, dash: [5, 4] });
+  if (show.drainage) drawContextCollection(state.context.drainage,
+    { stroke: 'rgba(96,165,250,.62)', width: 1.2 },
+    f => (f.properties?.channel_class || 'drainage') === 'drainage');
+  if (show.major) drawContextCollection(state.context.drainage,
+    { stroke: 'rgba(34,211,238,.94)', width: 2.2 },
+    f => f.properties?.channel_class === 'major');
+  const lineStyles = {
+    mapped: { stroke: 'rgba(251,113,133,.96)', width: 2.5 },
+    remote_derived: { stroke: 'rgba(232,121,249,.94)', width: 2, dash: [8, 5] },
+    inferred: { stroke: 'rgba(167,139,250,.9)', width: 2, dash: [2, 6] },
+  };
+  for (const status of ['mapped', 'remote_derived', 'inferred']) {
+    if (!show[status]) continue;
+    drawContextCollection(state.context.lineaments, lineStyles[status],
+      f => f.properties?.status === status);
+  }
+}
+
+function renderContextPanel() {
+  const panel = document.getElementById('contextPanel');
+  if (!panel) return;
+  const available = ['study', 'admin', 'wadi', 'drainage', 'lineaments']
+    .some(k => state.context[k]);
+  panel.style.display = (!state.isOverview && available) ? '' : 'none';
+  const counts = {
+    study: contextFeatures('study').length,
+    admin: contextFeatures('admin').length,
+    wadi: contextFeatures('wadi').length,
+    drainage: contextFeatures('drainage').filter(f => f.properties?.channel_class !== 'major').length,
+    major: contextFeatures('drainage').filter(f => f.properties?.channel_class === 'major').length,
+    mapped: contextFeatures('lineaments').filter(f => f.properties?.status === 'mapped').length,
+    remote_derived: contextFeatures('lineaments').filter(f => f.properties?.status === 'remote_derived').length,
+    inferred: contextFeatures('lineaments').filter(f => f.properties?.status === 'inferred').length,
+  };
+  panel.querySelectorAll('[data-context-layer]').forEach(input => {
+    const key = input.dataset.contextLayer;
+    const hasData = counts[key] > 0;
+    if (!hasData) state.context.show[key] = false;
+    input.checked = hasData && !!state.context.show[key];
+    input.disabled = !hasData;
+    const count = input.closest('.toggle-row')?.querySelector('.context-count');
+    if (count) count.textContent = counts[key];
+  });
+  const status = document.getElementById('lineamentStatus');
+  if (status) {
+    const p = state.context.lineaments?.properties;
+    status.textContent = p?.note || 'No classified lineament dataset is available for this region.';
+  }
+}
+
 // Draw the four region AOIs as labelled, clickable rectangles on the overview.
 function drawOverviewBoxes() {
   const boxes = state.meta.region_boxes;
@@ -1667,6 +1857,11 @@ function bindPanelNav() {
 function bindUI() {
   document.querySelectorAll('.layer-btn').forEach(b =>
     b.addEventListener('click', () => setLayer(b.dataset.layer)));
+  document.querySelectorAll('[data-context-layer]').forEach(input =>
+    input.addEventListener('change', () => {
+      state.context.show[input.dataset.contextLayer] = input.checked;
+      drawContextOverlays();
+    }));
   mapCanvas.addEventListener('mousemove', onMove);
   mapCanvas.addEventListener('click', onProfileClick);
 

@@ -5,8 +5,30 @@ Updated package: HydroSim has been restyled to match the supplied `layout.zip` r
 # Saudi Arabia Flood & Terrain Viewer
 
 Rainfall-driven flood prediction system for Saudi Arabia. A Kingdom-wide overview
-for navigation plus four full-resolution (~30 m) flood-analysis regions, each with
-its own terrain, hydrology, dams and rainfall-runoff flood model.
+for navigation plus six independent flood-analysis regions, each with its own
+terrain, hydrology, optional context overlays, dams and rainfall-runoff model.
+Source-raster resolution and processed simulation-grid resolution are reported
+separately; they are not interchangeable.
+
+## Makkah + Wadi Ibrahim 30 m regions
+
+Two hydrologically delineated UTM 37N products are now available under **Region &
+Data**:
+
+- **Makkah** — 1,387 × 723 at 30 m; 370.832 km² valid contributing basin,
+  closed immediately upstream of the major Wadi Uranah confluence.
+- **Wadi Ibrahim** — 515 × 440 at 30 m; 118.439 km² reverse-D8 watershed at
+  the snapped western urban outlet.
+
+Both are built window-by-window from the authoritative Supabase
+`flood-rasters/sinkfilled_dem.tif`, `dtm.tif`, `slope.tif` and `twi.tif` sources.
+Optional overlays show the study boundary, administrative reference, Wadi
+Ibrahim catchment, derived drainage and major channels. Lineament controls keep
+`mapped`, `remote_derived` and `inferred` provenance separate; no faults were
+fabricated from the un-georeferenced 1:250,000 browse images.
+
+See [MAKKAH-WADI-IBRAHIM-IMPLEMENTATION.md](MAKKAH-WADI-IBRAHIM-IMPLEMENTATION.md)
+for exact outlets, sources, files, validation and limitations.
 
 ## Phase 5 — Cinematic Render Mode (new)
 
@@ -38,15 +60,17 @@ The viewer is no longer limited to a single area. You can now choose the **scope
 of analysis from the sidebar:
 
 - **Kingdom overview** — a coarse, downsampled national elevation + wetness view
-  (EPSG:4326, ~1.6 km) used for navigation. The four analysis regions are drawn as
+  (EPSG:4326, ~1.6 km) used for navigation. The six analysis regions are drawn as
   labelled, clickable boxes; click a box (or pick from the dropdown) to zoom into
   that region at full resolution.
-- **Four analysis regions**, each processed independently from the Kingdom-wide
+- **Six analysis regions**, each processed independently from the Kingdom-wide
   source rasters with its own grid, UTM projection, hydrology and dam inventory:
   - **Makkah – Jeddah – Taif** (UTM 37N, 174 × 126 km)
   - **Riyadh Region** (UTM 38N, 162 × 133 km)
   - **Eastern Province (Dammam – Khobar)** (UTM 39N, coastal lowlands)
   - **Asir / Abha Highlands** (UTM 38N, SW escarpment, up to ~2,990 m)
+  - **Makkah** (UTM 37N, 30 m processed grid, 370.832 km² study area)
+  - **Wadi Ibrahim Watershed** (UTM 37N, 30 m processed grid, 118.439 km² delineated catchment)
 - **Region dropdown** at the top of the sidebar switches scope on demand; layer
   data is loaded lazily so only the active region's grids are fetched.
 - **Procedural basemaps** — elevation colour relief, hillshade, slope and aspect are
@@ -72,14 +96,14 @@ of analysis from the sidebar:
 
 The original viewer used a shaded-relief image as if it were elevation, and the flood tool was a simple bathtub. v2 introduced the real-terrain + rainfall-runoff approach now used across all regions:
 
-- **Real terrain** reprojected to UTM at 30 m per region (Makkah–Jeddah–Taif: 174.4 × 126.4 km, elevations −3 to 2,595 m).
+- **Real terrain** reprojected to UTM per region. The Makkah–Jeddah–Taif source is ~30 m, but its 1,600 × 1,152 simulation grid over 174.4 × 126.4 km is ~109–110 m (elevations −3 to 2,595 m).
 - **Rainfall-runoff flood model** instead of bathtub: you specify storm depth (mm), duration (h), and soil infiltration class. The model computes runoff, routes it through the D8 flow network derived from the real DEM, estimates peak discharge per channel, and maps inundation depth using regime equations.
 
 ## Phase 3 — High-precision DEM + Topographic Wetness Index (new)
 
 The terrain and hydrology now come from the project's own authoritative rasters instead of the generic Copernicus DEM:
 
-- **Sink-filled DEM** — a Kingdom-wide, depression-filled ~30 m DEM (EPSG:4326), clipped to the Makkah–Jeddah–Taif AOI and reprojected to UTM 37N. Flow direction and flow accumulation are recomputed from this surface with pysheds, giving a hydrologically conditioned drainage network specific to the project data.
+- **Sink-filled DEM** — a Kingdom-wide, depression-filled ~30 m DEM (EPSG:4326), clipped to each AOI and reprojected to its local UTM grid. Makkah and Wadi Ibrahim use `pyflwdir` for depression filling, D8 flow direction, and flow accumulation; legacy regions retain their previously generated hydrology.
 - **Topographic Wetness Index (TWI)** — the project's authoritative TWI raster, rank-normalised to a 0–1 flood-susceptibility index (1 = wettest valley bottoms that pond/flood first). The flood model uses it to amplify modelled water depth in saturated low-lying cells and dampen it on well-drained slopes, without changing total runoff volume.
 - **Slope** — the project's authoritative slope raster (converted from radians to degrees).
 - **Wetness (TWI) layer** — a new map basemap that paints the 0–1 wetness index directly (dry warm-earth → wet deep-blue), rendered from the `twi.bin` grid rather than a pre-baked PNG. It reveals the saturated valley-bottom drainage network that floods first, and works under the flood overlay and dam markers.
@@ -145,8 +169,8 @@ Any static file server works — no backend required.
 
 Pipeline:
 
-1. **DEM**: Copernicus GLO-30 → pit-filled with pysheds
-2. **Hydrology**: D8 flow direction + flow accumulation (saved as flowdir.bin, flowacc.bin)
+1. **DEM**: authoritative Kingdom-scale ~30 m DEM → depression-filled with `pyflwdir` for the Makkah and Wadi Ibrahim builds (legacy regions retain their earlier preprocessing)
+2. **Hydrology**: D8 flow direction + flow accumulation on each processed simulation grid (saved as flowdir.bin, flowacc.bin)
 3. **Runoff generation**: SCS-style initial abstraction, then runoff coefficient by soil class, modulated by local slope
 4. **Routing**: runoff volume accumulated downstream along D8 network
 5. **Channel definition**: only cells with ≥ 50-cell upstream contributing area (≈ 4.5 ha) are treated as channels
@@ -157,7 +181,7 @@ Pipeline:
 ## Data files
 
 Data is organised by scope. Each analysis region lives in `data/regions/<key>/`
-(`makkah_jeddah_taif`, `riyadh`, `eastern_province`, `asir_abha`), and the Kingdom
+(`makkah_jeddah_taif`, `makkah`, `wadi_ibrahim`, `riyadh`, `eastern_province`, `asir_abha`), and the Kingdom
 overview lives in `data/kingdom/`. Grid dimensions vary per region — the app reads
 `width`/`height` from each region's `metadata.json`.
 
@@ -172,6 +196,9 @@ Per-region files:
 - `dams.geojson` — dams with name (en/ar), and (MJT) capacity, catchment area, `verified` flag
 - `dam_catchments.bin` — (MJT only) Uint16 LE label grid (0 = no dam, else dam index + 1)
 - `metadata.json` — projection, bounds, grid size, statistics, `has_catchments` flag
+- optional `study_boundary.geojson`, `admin_boundary.geojson`,
+  `wadi_catchment.geojson`, `drainage.geojson`, `lineaments.geojson` — visual
+  context only; never hydrologic walls
 
 Kingdom overview (`data/kingdom/`):
 
@@ -183,16 +210,17 @@ from `elevation.bin`/`slope.bin`, so no basemap PNGs are bundled.
 
 ## Source DEM
 
-Copernicus GLO-30 Digital Surface Model, downloaded from AWS Open Data:
-`https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_<TILE>_DEM/<file>.tif`
-
-License: free for any use, including commercial.
+The authoritative current source is the Kingdom-scale, sink-filled ~30 m DEM in
+Supabase project `asabtan-vault`, bucket `flood-rasters`, object
+`sinkfilled_dem.tif`. Preprocessing reads only required byte ranges. Legacy
+Copernicus GLO-30 references describe the earlier v2 foundation and should not be
+used to infer that every processed browser grid is 30 m.
 
 ## Limitations & next steps
 
 This is a screening tool, not an engineering flood model. Known limitations:
 
-- 30 m DEM smooths narrow wadi channels — local depths may be underestimated in tight gorges
+- The source DEM is approximately 30 m and cannot resolve narrow engineered channels; several legacy browser grids are coarser (~81–110 m), further smoothing local drainage
 - Reservoir model uses static capacity and a single fill-then-overflow step (no time-stepped routing, spillway curves, or pre-storm fill state)
 - Estimated capacities (21 of 27 dams) are height-class defaults and should be replaced with MEWA design figures where available
 - Uniform rainfall over AOI (no spatial storm pattern)
@@ -202,11 +230,11 @@ This is a screening tool, not an engineering flood model. Known limitations:
 Roadmap for Kingdom-wide expansion:
 
 1. ✅ Add Wadi Naman, Wadi Fatimah, and other dam locations from OSM with reservoir capacity (Phase 2 — done)
-2. ✅ Multi-region scope with Kingdom overview + four analysis regions and live rain controls (Phase 4 — done)
+2. ✅ Multi-region scope with Kingdom overview + six analysis regions and live rain controls (Phase 4 — done)
 3. Compute catchment grids for Riyadh / Eastern Province / Asir so their dams route runoff like MJT
 4. Replace estimated dam capacities with authoritative MEWA design figures
 5. Hindcast validation against Jeddah 2009 and 2022 floods using Sentinel-1 SAR observations
 6. Scale to remaining regions by tiling on HydroBASINS level-7 watersheds
 
 ---
-Built on Copernicus GLO-30 DEM (© European Space Agency, free license).
+Current Makkah and Wadi Ibrahim builds use the authoritative Kingdom-scale ~30 m sink-filled DEM stored in the project's Supabase object storage; see the implementation report for provenance and limitations.

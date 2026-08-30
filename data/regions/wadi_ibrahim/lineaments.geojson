@@ -1,0 +1,17 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "status": "no_reliably_georeferenced_vector_features_available",
+    "mapped_sources_reviewed": [
+      "GM-107C Makkah, 1:250,000 (Supabase Maps; WEBP/JPEG only)",
+      "GM-96C Jibal Ibrahim, 1:250,000 (Supabase Maps; WEBP/JPEG only)"
+    ],
+    "note": "Stored browse images have no raster transform or companion vector data. No faults were guessed from screenshots, and no remote-derived or inferred features are published by this build.",
+    "allowed_status_values": [
+      "mapped",
+      "remote_derived",
+      "inferred"
+    ]
+  },
+  "features": []
+}

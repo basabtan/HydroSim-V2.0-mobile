@@ -119,6 +119,22 @@
           </label>
         </section>
 
+        <section class="panel context-panel" id="contextPanel" style="display:none">
+          <h2>Hydrology &amp; Geology</h2>
+          <p class="context-group">Reference boundaries</p>
+          <label class="toggle-row context-row"><span>Study boundary <small class="context-count">0</small></span><input type="checkbox" data-context-layer="study" checked /></label>
+          <label class="toggle-row context-row"><span>Administrative reference <small class="context-count">0</small></span><input type="checkbox" data-context-layer="admin" /></label>
+          <label class="toggle-row context-row"><span>Wadi Ibrahim catchment <small class="context-count">0</small></span><input type="checkbox" data-context-layer="wadi" checked /></label>
+          <p class="context-group">Surface drainage</p>
+          <label class="toggle-row context-row"><span>Drainage network <small class="context-count">0</small></span><input type="checkbox" data-context-layer="drainage" /></label>
+          <label class="toggle-row context-row"><span>Major channels <small class="context-count">0</small></span><input type="checkbox" data-context-layer="major" checked /></label>
+          <p class="context-group">Lineaments by provenance</p>
+          <label class="toggle-row context-row mapped"><span>Mapped <small class="context-count">0</small></span><input type="checkbox" data-context-layer="mapped" checked /></label>
+          <label class="toggle-row context-row remote"><span>Remote-derived <small class="context-count">0</small></span><input type="checkbox" data-context-layer="remote_derived" /></label>
+          <label class="toggle-row context-row inferred"><span>Inferred <small class="context-count">0</small></span><input type="checkbox" data-context-layer="inferred" /></label>
+          <p class="hint context-note" id="lineamentStatus"></p>
+        </section>
+
         <section class="panel" id="legendPanel">
           <h2 id="legendTitle">Elevation</h2>
           <div class="legend-bar" id="legendBar"></div>
@@ -153,6 +169,7 @@
           <canvas id="floodCanvas"></canvas>
           <canvas id="waterCanvas"></canvas>
           <canvas id="damsCanvas"></canvas>
+          <canvas id="contextCanvas"></canvas>
           <canvas id="overlayCanvas"></canvas>
 
           <!-- Cursor coordinate indicator (orbit ring) -->
